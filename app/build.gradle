@@ -1,0 +1,30 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.xiaojinzi.module.base'
+
+    defaultConfig {
+        applicationId "com.xiaojinzi.module.demo"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+apply from: project.getRootProjectPath() + "/common_android.gradle"
+apply from: project.getRootProjectPath() + "/common_kapt_for_component.gradle"
+
+dependencies {
+    api project(':module-base')
+    api project(':lib-resource')
+}

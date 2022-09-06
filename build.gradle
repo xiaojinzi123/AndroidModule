@@ -1,0 +1,32 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "common_support.gradle"
+
+buildscript {
+
+    ext {
+        compose_version = '1.1.1'
+    }
+
+    ext.kotlin_version = "1.6.10"
+    ext.kotlin_coroutines_version = "1.6.4"
+
+    ext.component_router_doc_folder = "./Doc"
+    ext.component_router_doc_enable = false
+    // ext.component_asm_util_class_output_path = "./Temp/ASMUtil.class"
+
+    apply from: "dependencies.gradle"
+
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // 组件化的
+        classpath libs.component_plugin
+    }
+
+}
