@@ -23,3 +23,4 @@ include ':app'
 include ':module-base'
 
 include ':lib-resource'
+include ':module-ffmpeg'

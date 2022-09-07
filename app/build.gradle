@@ -25,6 +25,7 @@ apply from: project.getRootProjectPath() + "/common_android.gradle"
 apply from: project.getRootProjectPath() + "/common_kapt_for_component.gradle"
 
 dependencies {
+    api project(':module-ffmpeg')
     api project(':module-base')
     api project(':lib-resource')
 }
