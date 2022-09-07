@@ -1,8 +1,8 @@
-package com.xiaojinzi.module.bugly.spi
+package com.xiaojinzi.module.common.bugly.spi
 
 import com.tencent.bugly.crashreport.CrashReport
 import com.xiaojinzi.component.anno.ServiceAnno
-import com.xiaojinzi.module.base.spi.BuglySpi
+import com.xiaojinzi.module.common.base.spi.BuglySpi
 import com.xiaojinzi.support.ktx.app
 
 @ServiceAnno(BuglySpi::class)

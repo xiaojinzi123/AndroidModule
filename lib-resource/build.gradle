@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.xiaojinzi.lib.res'
+    namespace 'com.xiaojinzi.lib.common.res'
 }
 
 apply from: project.getRootProjectPath() + "/common_android_lib.gradle"

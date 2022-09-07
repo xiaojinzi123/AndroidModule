@@ -1,8 +1,7 @@
-package com.xiaojinzi.module.base.view
+package com.xiaojinzi.module.common.base.view
 
 import android.os.Bundle
 import com.xiaojinzi.component.Component
-import com.xiaojinzi.module.base.R
 import com.xiaojinzi.support.architecture.mvvm1.BaseAct
 import com.xiaojinzi.support.architecture.mvvm1.BaseViewModel
 
@@ -20,7 +19,10 @@ open class CommonActivity<VM : BaseViewModel> : BaseAct<VM>() {
 
     override fun finish() {
         super.finish()
-        overridePendingTransition(com.xiaojinzi.lib.res.R.anim.none, com.xiaojinzi.lib.res.R.anim.bottom_out)
+        overridePendingTransition(
+            com.xiaojinzi.common.lib.res.R.anim.none,
+            com.xiaojinzi.common.lib.res.R.anim.bottom_out
+        )
     }
 
 }

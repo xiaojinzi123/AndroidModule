@@ -1,4 +1,4 @@
-package com.xiaojinzi.module.base.router
+package com.xiaojinzi.module.common.base.router
 
 import android.content.Intent
 import android.net.Uri
@@ -6,7 +6,7 @@ import android.provider.Settings
 import com.xiaojinzi.component.anno.RouterAnno
 import com.xiaojinzi.component.impl.RouterRequest
 import com.xiaojinzi.component.support.ParameterSupport
-import com.xiaojinzi.module.base.RouterConfig
+import com.xiaojinzi.module.common.base.RouterConfig
 import com.xiaojinzi.support.ktx.app
 
 /**

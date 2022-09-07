@@ -1,4 +1,4 @@
-package com.xiaojinzi.module.demo
+package com.xiaojinzi.module.common.demo
 
 import android.app.Application
 

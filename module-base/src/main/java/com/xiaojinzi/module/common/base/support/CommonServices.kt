@@ -1,9 +1,9 @@
-package com.xiaojinzi.module.base.support
+package com.xiaojinzi.module.common.base.support
 
 import com.xiaojinzi.component.impl.service.ServiceManager
-import com.xiaojinzi.module.base.spi.BuglySpi
-import com.xiaojinzi.module.base.spi.FFmpegSpi
-import com.xiaojinzi.module.base.spi.SPSpi
+import com.xiaojinzi.module.common.base.spi.BuglySpi
+import com.xiaojinzi.module.common.base.spi.FFmpegSpi
+import com.xiaojinzi.module.common.base.spi.SPSpi
 
 /**
  * 一些通用模块的服务

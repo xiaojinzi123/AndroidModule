@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.xiaojinzi.module.base'
+    namespace 'com.xiaojinzi.module.common.base'
 }
 
 apply from: project.getRootProjectPath() + "/common_android.gradle"

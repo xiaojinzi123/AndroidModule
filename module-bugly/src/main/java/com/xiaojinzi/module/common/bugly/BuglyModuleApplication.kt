@@ -1,20 +1,15 @@
-package com.xiaojinzi.module.ffmpeg
+package com.xiaojinzi.module.common.bugly
 
 import android.app.Application
 import com.xiaojinzi.component.anno.ModuleAppAnno
 import com.xiaojinzi.component.application.IApplicationLifecycle
 import com.xiaojinzi.component.application.IModuleNotifyChanged
-import io.microshow.rxffmpeg.RxFFmpegInvoke
 
-/**
- * 使用的项目地址：https://github.com/microshow/RxFFmpeg
- */
 @ModuleAppAnno
-class FFmpegModuleApplication: IApplicationLifecycle, IModuleNotifyChanged {
+class BuglyModuleApplication: IApplicationLifecycle, IModuleNotifyChanged {
 
     override
     fun onCreate(application: Application) {
-        RxFFmpegInvoke.getInstance().setDebug(true)
     }
 
     override

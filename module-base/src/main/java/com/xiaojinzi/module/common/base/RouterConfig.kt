@@ -1,4 +1,4 @@
-package com.xiaojinzi.module.base
+package com.xiaojinzi.module.common.base
 
 import android.annotation.SuppressLint
 import android.provider.Settings

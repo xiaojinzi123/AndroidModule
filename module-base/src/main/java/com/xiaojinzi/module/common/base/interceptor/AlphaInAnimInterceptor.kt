@@ -1,4 +1,4 @@
-package com.xiaojinzi.module.base.interceptor
+package com.xiaojinzi.module.common.base.interceptor
 
 import com.xiaojinzi.component.impl.RouterInterceptor
 import com.xiaojinzi.component.impl.RouterInterceptor.Chain

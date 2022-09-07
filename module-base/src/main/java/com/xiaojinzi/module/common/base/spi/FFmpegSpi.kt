@@ -1,4 +1,4 @@
-package com.xiaojinzi.module.base.spi
+package com.xiaojinzi.module.common.base.spi
 
 interface FFmpegSpi {
 

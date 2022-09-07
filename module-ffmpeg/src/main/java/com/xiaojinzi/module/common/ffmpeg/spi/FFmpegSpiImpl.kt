@@ -1,7 +1,7 @@
-package com.xiaojinzi.module.ffmpeg.spi
+package com.xiaojinzi.module.common.ffmpeg.spi
 
 import com.xiaojinzi.component.anno.ServiceAnno
-import com.xiaojinzi.module.base.spi.FFmpegSpi
+import com.xiaojinzi.module.common.base.spi.FFmpegSpi
 import com.xiaojinzi.support.ktx.resumeExceptionIgnoreException
 import com.xiaojinzi.support.ktx.resumeIgnoreException
 import com.xiaojinzi.support.util.LogSupport
