@@ -20,9 +20,11 @@ rootProject.name = "AndroidModule"
 
 include ':app'
 
+include ':lib-resource'
+
 include ':module-base'
 
-include ':lib-resource'
 include ':module-ffmpeg'
 include ':module-bugly'
 include ':module-wx-sdk'
+include ':module-ali-pay'

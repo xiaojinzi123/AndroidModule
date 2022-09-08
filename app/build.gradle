@@ -28,6 +28,7 @@ dependencies {
     api project(':module-bugly')
     api project(':module-ffmpeg')
     api project(':module-wx-sdk')
+    api project(':module-ali-pay')
     api project(':module-base')
     api project(':lib-resource')
 }

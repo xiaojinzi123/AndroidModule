@@ -50,4 +50,10 @@ object CommonServices {
     val wxPaySpi: WXPaySpi?
         get() = ServiceManager.get(WXPaySpi::class.java)
 
+    /**
+     * 支付宝支付 的服务
+     */
+    val alipaySpi: AlipaySpi?
+        get() = ServiceManager.get(AlipaySpi::class.java)
+
 }
