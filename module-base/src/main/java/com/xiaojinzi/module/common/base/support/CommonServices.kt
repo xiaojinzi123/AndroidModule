@@ -2,6 +2,7 @@ package com.xiaojinzi.module.common.base.support
 
 import com.xiaojinzi.component.impl.service.ServiceManager
 import com.xiaojinzi.module.common.base.spi.BuglySpi
+import com.xiaojinzi.module.common.base.spi.CommonAppInfoAdapterSpi
 import com.xiaojinzi.module.common.base.spi.FFmpegSpi
 import com.xiaojinzi.module.common.base.spi.SPSpi
 
@@ -9,6 +10,12 @@ import com.xiaojinzi.module.common.base.spi.SPSpi
  * 一些通用模块的服务
  */
 object CommonServices {
+
+    /**
+     * SharedPreference 的服务
+     */
+    val appInfoAdapterSpi: CommonAppInfoAdapterSpi?
+        get() = ServiceManager.get(CommonAppInfoAdapterSpi::class.java)
 
     /**
      * SharedPreference 的服务
