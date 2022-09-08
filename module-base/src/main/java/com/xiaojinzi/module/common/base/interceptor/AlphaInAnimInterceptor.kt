@@ -2,7 +2,6 @@ package com.xiaojinzi.module.common.base.interceptor
 
 import com.xiaojinzi.component.impl.RouterInterceptor
 import com.xiaojinzi.component.impl.RouterInterceptor.Chain
-import com.xiaojinzi.module.base.R
 
 open class AlphaInAnimInterceptor : RouterInterceptor {
 
@@ -16,7 +15,10 @@ open class AlphaInAnimInterceptor : RouterInterceptor {
             .toBuilder()
             .afterStartAction {
                 originAfterAction?.invoke()
-                rawActivity?.overridePendingTransition(com.xiaojinzi.lib.res.R.anim.alpha_in, com.xiaojinzi.lib.res.R.anim.none)
+                rawActivity?.overridePendingTransition(
+                    com.xiaojinzi.lib.common.res.R.anim.alpha_in,
+                    com.xiaojinzi.lib.common.res.R.anim.none
+                )
             }
             .build()
         chain.proceed(request)

@@ -20,8 +20,8 @@ open class CommonActivity<VM : BaseViewModel> : BaseAct<VM>() {
     override fun finish() {
         super.finish()
         overridePendingTransition(
-            com.xiaojinzi.common.lib.res.R.anim.none,
-            com.xiaojinzi.common.lib.res.R.anim.bottom_out
+            com.xiaojinzi.lib.common.res.R.anim.none,
+            com.xiaojinzi.lib.common.res.R.anim.bottom_out
         )
     }
 
