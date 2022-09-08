@@ -12,5 +12,5 @@ android {
 apply from: project.getRootProjectPath() + "/common_module.gradle"
 
 dependencies {
-    implementation 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.11'
+    api 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.11'
 }
