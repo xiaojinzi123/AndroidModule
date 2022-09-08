@@ -44,4 +44,10 @@ object CommonServices {
     val wxLoginSpi: WXLoginSpi?
         get() = ServiceManager.get(WXLoginSpi::class.java)
 
+    /**
+     * 微信支付 的服务
+     */
+    val wxPaySpi: WXPaySpi?
+        get() = ServiceManager.get(WXPaySpi::class.java)
+
 }
