@@ -12,5 +12,6 @@ android {
 apply from: project.getRootProjectPath() + "/common_module.gradle"
 
 dependencies {
+    // 这里必须 api, 因为使用的地方要继承的时候, 会检测能不能依赖到某个类
     api 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.11'
 }
