@@ -11,6 +11,12 @@ android {
 
 apply from: project.getRootProjectPath() + "/common_module.gradle"
 
+kapt {
+    arguments {
+        arg("ModuleName", "module_common_ffmpeg")
+    }
+}
+
 dependencies {
     implementation 'com.github.microshow:RxFFmpeg:4.9.0-lite'
 }

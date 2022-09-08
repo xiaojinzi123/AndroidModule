@@ -12,6 +12,12 @@ android {
 apply from: project.getRootProjectPath() + "/common_android.gradle"
 apply from: project.getRootProjectPath() + "/common_kapt_for_component.gradle"
 
+kapt {
+    arguments {
+        arg("ModuleName", "module_common_base")
+    }
+}
+
 dependencies {
     api project(':lib-resource')
     kapt libs.component_compiler

@@ -11,6 +11,12 @@ android {
 
 apply from: project.getRootProjectPath() + "/common_module.gradle"
 
+kapt {
+    arguments {
+        arg("ModuleName", "module_common_bugly")
+    }
+}
+
 dependencies {
     implementation 'com.tencent.bugly:crashreport:4.0.4'
 }
