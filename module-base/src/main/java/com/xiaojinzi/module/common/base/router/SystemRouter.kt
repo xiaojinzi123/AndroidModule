@@ -6,7 +6,7 @@ import android.provider.Settings
 import com.xiaojinzi.component.anno.RouterAnno
 import com.xiaojinzi.component.impl.RouterRequest
 import com.xiaojinzi.component.support.ParameterSupport
-import com.xiaojinzi.module.common.base.RouterConfig
+import com.xiaojinzi.module.common.base.CommonRouterConfig
 import com.xiaojinzi.support.ktx.app
 
 /**
@@ -15,7 +15,7 @@ import com.xiaojinzi.support.ktx.app
  * @param request
  * @return
  */
-@RouterAnno(hostAndPath = RouterConfig.SYSTEM_APP_DETAIL)
+@RouterAnno(hostAndPath = CommonRouterConfig.SYSTEM_APP_DETAIL)
 fun appDetail(request: RouterRequest): Intent {
     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
     intent.data = Uri.parse("package:" + request.rawContext!!.packageName)
@@ -34,7 +34,7 @@ fun systemBrowser(request: RouterRequest): Intent {
 }
 
 @RouterAnno(
-    hostAndPath = RouterConfig.SYSTEM_APP_MARKET
+    hostAndPath = CommonRouterConfig.SYSTEM_APP_MARKET
 )
 fun toAppMarket(request: RouterRequest): Intent {
     val packageName: String? = ParameterSupport.getString(request.bundle, "packageName")
@@ -48,7 +48,7 @@ fun toAppMarket(request: RouterRequest): Intent {
 }
 
 @RouterAnno(
-    hostAndPath = RouterConfig.SYSTEM_ACTION_ACCESSIBILITY_SETTINGS
+    hostAndPath = CommonRouterConfig.SYSTEM_ACTION_ACCESSIBILITY_SETTINGS
 )
 fun accessibilitySettings(request: RouterRequest): Intent {
     return Intent().apply {
@@ -57,7 +57,7 @@ fun accessibilitySettings(request: RouterRequest): Intent {
 }
 
 @RouterAnno(
-    hostAndPath = RouterConfig.SYSTEM_ACTION_MANAGE_OVERLAY_PERMISSION
+    hostAndPath = CommonRouterConfig.SYSTEM_ACTION_MANAGE_OVERLAY_PERMISSION
 )
 fun manageOverlayPermission(request: RouterRequest): Intent {
     return Intent().apply {
@@ -67,7 +67,7 @@ fun manageOverlayPermission(request: RouterRequest): Intent {
 }
 
 @RouterAnno(
-    hostAndPath = RouterConfig.SYSTEM_IMAGE_PICKER
+    hostAndPath = CommonRouterConfig.SYSTEM_IMAGE_PICKER
 )
 fun imagePicker(request: RouterRequest): Intent {
     val isSelectMultiple: Boolean =
@@ -85,7 +85,7 @@ fun imagePicker(request: RouterRequest): Intent {
 }
 
 @RouterAnno(
-    hostAndPath = RouterConfig.SYSTEM_VIDEO_PICKER
+    hostAndPath = CommonRouterConfig.SYSTEM_VIDEO_PICKER
 )
 fun videoPicker(request: RouterRequest): Intent {
     val isSelectMultiple: Boolean =

@@ -5,7 +5,7 @@ import android.provider.Settings
 
 // ------------------------------------ 公共的 ------------------------------------
 
-object RouterConfig {
+object CommonRouterConfig {
 
     const val PLACEHOLDER = "TODO/TODO"
 
