@@ -9,7 +9,7 @@ interface TxCosSpi: FileUploadSpi {
     /**
      * 初始化
      */
-    suspend fun initOss(
+    suspend fun init(
         region: String,
         bucket: String,
     )

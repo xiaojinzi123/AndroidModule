@@ -46,7 +46,7 @@ class TxCosFileUploadServiceImpl : FileUploadServiceBaseImpl(), TxCosSpi {
 
     private val taskMap: ConcurrentHashMap<String, COSXMLUploadTask> = ConcurrentHashMap()
 
-    override suspend fun initOss(region: String, bucket: String) {
+    override suspend fun init(region: String, bucket: String) {
         this.region = region
         this.bucket = bucket
         serviceConfig = CosXmlServiceConfig.Builder()
@@ -120,7 +120,7 @@ class TxCosFileUploadServiceImpl : FileUploadServiceBaseImpl(), TxCosSpi {
             override fun onFail(
                 request: CosXmlRequest,
                 clientException: CosXmlClientException?,
-                serviceException: CosXmlServiceException?
+                serviceException: CosXmlServiceException?,
             ) {
                 /*if (clientException != null) {
                     clientException.printStackTrace()
