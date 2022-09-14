@@ -29,6 +29,7 @@ dependencies {
     api project(':module-ffmpeg')
     api project(':module-wx-sdk')
     api project(':module-ali-pay')
+    api project(':module-tx-cos')
     api project(':module-base')
     api project(':lib-resource')
 }

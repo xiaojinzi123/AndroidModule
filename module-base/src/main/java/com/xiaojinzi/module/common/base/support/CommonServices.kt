@@ -56,4 +56,16 @@ object CommonServices {
     val alipaySpi: AlipaySpi?
         get() = ServiceManager.get(AlipaySpi::class.java)
 
+    /**
+     * 腾讯 Cos 对象存储 的服务
+     */
+    val txCosSpi: TxCosSpi?
+        get() = ServiceManager.get(TxCosSpi::class.java)
+
+    /**
+     * 腾讯 Cos 对象存储的 凭证信息获取 的服务
+     */
+    val txCosCredentialGetService: TxCosCredentialGetService?
+        get() = ServiceManager.get(TxCosCredentialGetService::class.java)
+
 }
