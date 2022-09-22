@@ -1,5 +1,5 @@
 
-apply from: project.getRootProjectPath() + "/common_android_lib.gradle"
+apply from: project.getRootProjectPath() + "/script1/common_android_lib.gradle"
 
 android {
     buildFeatures {
