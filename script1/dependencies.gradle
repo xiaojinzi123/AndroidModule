@@ -51,6 +51,7 @@ ext.libs = [
         support_compose             : "com.github.xiaojinzi123.AndroidSupport:lib-compose:${versions.support_version}",
 
         lib_resource                : "com.github.xiaojinzi123.AndroidModule:lib-resource:${versions.android_module_version}",
+        module_base                 : "com.github.xiaojinzi123.AndroidModule:module-base:${versions.android_module_version}",
         module_ffmpeg               : "com.github.xiaojinzi123.AndroidModule:module-ffmpeg:${versions.android_module_version}",
         module_wx_sdk               : "com.github.xiaojinzi123.AndroidModule:module-wx-sdk:${versions.android_module_version}",
         module_ali_pay              : "com.github.xiaojinzi123.AndroidModule:module-ali-pay:${versions.android_module_version}",
