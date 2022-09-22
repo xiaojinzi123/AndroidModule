@@ -37,8 +37,10 @@ ext.libs = [
         gson                        : "com.google.code.gson:gson:2.9.1",
         retrofit                    : "com.squareup.retrofit2:retrofit:2.9.0",
         retrofit_converter_gson     : "com.squareup.retrofit2:converter-gson:2.9.0",
+
         develop_serverLog           : "com.github.xiaojinzi123.AndroidDevelop:serverLogForAndroid:v1.0.0-beta14",
         develop_serverLog_plugin    : 'com.github.xiaojinzi123.AndroidDevelop:serverLog-log-gradle-plugin:v1.0.0-beta14',
+
         support_bean                : "com.github.xiaojinzi123.AndroidSupport:lib-bean:${versions.support_version}",
         support_init                : "com.github.xiaojinzi123.AndroidSupport:lib-init:${versions.support_version}",
         support_annotation          : "com.github.xiaojinzi123.AndroidSupport:lib-annotation:${versions.support_version}",
@@ -47,6 +49,14 @@ ext.libs = [
         support_logger              : "com.github.xiaojinzi123.AndroidSupport:lib-logger:${versions.support_version}",
         support_architecture        : "com.github.xiaojinzi123.AndroidSupport:lib-architecture:${versions.support_version}",
         support_compose             : "com.github.xiaojinzi123.AndroidSupport:lib-compose:${versions.support_version}",
+
+        lib_resource                : "com.github.xiaojinzi123.AndroidModule:lib-resource:${versions.android_module_version}",
+        module_ffmpeg               : "com.github.xiaojinzi123.AndroidModule:module-ffmpeg:${versions.android_module_version}",
+        module_wx_sdk               : "com.github.xiaojinzi123.AndroidModule:module-wx-sdk:${versions.android_module_version}",
+        module_ali_pay              : "com.github.xiaojinzi123.AndroidModule:module-ali-pay:${versions.android_module_version}",
+        module_tx_cos               : "com.github.xiaojinzi123.AndroidModule:module-tx-cos:${versions.android_module_version}",
+        module_bugly                : "com.github.xiaojinzi123.AndroidModule:module-bugly:${versions.android_module_version}",
+
         rxKotlin                    : "io.reactivex.rxjava2:rxkotlin:2.4.0",
         leakcanary                  : 'com.squareup.leakcanary:leakcanary-android:2.9.1',
         kotlin_flow_extensions      : "com.github.akarnokd:kotlin-flow-extensions:0.0.14",
