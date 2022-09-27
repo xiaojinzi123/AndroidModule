@@ -21,8 +21,8 @@ android {
 
 }
 
-apply from: project.getRootProjectPath() + "/script1/common_android.gradle"
-apply from: project.getRootProjectPath() + "/script1/common_kapt_for_component.gradle"
+apply from: "$commonScriptPath/github/common_android.gradle"
+apply from: "$commonScriptPath/common_kapt_for_component.gradle"
 
 dependencies {
     api project(':module-bugly')

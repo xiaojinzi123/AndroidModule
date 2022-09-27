@@ -1,7 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply from: "./script1/common_support.gradle"
 
 buildscript {
+
+    ext.commonScriptPath = "https://raw.githubusercontent.com/xiaojinzi123/AndroidModuleScript/main/script1"
+    apply from: "$commonScriptPath/common_support.gradle"
 
     ext {
         compose_version = '1.1.1'
@@ -14,7 +16,7 @@ buildscript {
     ext.component_router_doc_enable = false
     // ext.component_asm_util_class_output_path = "./Temp/ASMUtil.class"
 
-    apply from: "./script1/dependencies.gradle"
+    apply from: "$commonScriptPath/dependencies.gradle"
 
     repositories {
         google()
