@@ -8,7 +8,7 @@ android {
     namespace 'com.xiaojinzi.lib.common.res'
 }
 
-apply from: "$commonScriptPath/common_android_lib.gradle"
+apply from: getRootProjectPath() + "/common_android_lib.gradle"
 
 dependencies {
     api libs.support_bean
