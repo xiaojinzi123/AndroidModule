@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="common_res_str_confirm" >确定</string>
+    <string name="common_res_str_cancel" >取消</string>
+    <string name="common_res_str_tip" >提示</string>
+
+    <string name="res_str_desc1">页面休息了, 点击空白处重试</string>
+
+</resources>

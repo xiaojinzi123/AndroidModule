@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="common_res_str_confirm" >Confirm</string>
+    <string name="common_res_str_cancel" >Cancel</string>
+    <string name="common_res_str_tip" >Tip</string>
+
+
+    <string name="res_str_desc1">Page had a rest\nPlease click on the space to try again</string>
+
+</resources>
