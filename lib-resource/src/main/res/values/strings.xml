@@ -5,7 +5,6 @@
     <string name="common_res_str_cancel" >Cancel</string>
     <string name="common_res_str_tip" >Tip</string>
 
-
-    <string name="res_str_desc1">Page had a rest\nPlease click on the space to try again</string>
+    <string name="common_res_str_desc1">Page had a rest\nPlease click on the space to try again</string>
 
 </resources>

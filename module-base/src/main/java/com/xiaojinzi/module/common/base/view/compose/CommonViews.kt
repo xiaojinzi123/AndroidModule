@@ -59,7 +59,7 @@ fun CommonErrorDataView(
             contentDescription = null
         )
         Text(
-            text = stringResource(id = com.xiaojinzi.lib.common.res.R.string.res_str_desc1),
+            text = stringResource(id = com.xiaojinzi.lib.common.res.R.string.common_res_str_desc1),
             style = TextStyle(
                 color = Color(0xFFABA5AB),
                 lineHeight = 20.sp,
