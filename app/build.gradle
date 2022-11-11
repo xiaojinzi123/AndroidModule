@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.xiaojinzi.component.plugin'
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
@@ -29,6 +30,7 @@ dependencies {
     api project(':module-ffmpeg')
     api project(':module-wx-sdk')
     api project(':module-ali-pay')
+    api project(':module-image-crop')
     api project(':module-tx-cos')
     api project(':module-base')
     api project(':lib-resource')

@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/module-base" />
             <option value="$PROJECT_DIR$/module-bugly" />
             <option value="$PROJECT_DIR$/module-ffmpeg" />
+            <option value="$PROJECT_DIR$/module-image-crop" />
             <option value="$PROJECT_DIR$/module-tx-cos" />
             <option value="$PROJECT_DIR$/module-wx-sdk" />
           </set>

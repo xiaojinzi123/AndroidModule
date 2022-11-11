@@ -23,23 +23,10 @@ class MainUseCaseImpl(
 
     override suspend fun initData() {
         super.initData()
-        delay(timeMillis = 6000)
+        delay(timeMillis = 2000)
     }
 
     init {
-
-        scope.launch {
-            delay(timeMillis = 2000)
-            commonUseCase.showLoading(isShow = true)
-            delay(timeMillis = 20000)
-            commonUseCase.showLoading(isShow = false)
-            /*postConfirmDialog(
-                title = "q123".toStringItemDto(),
-                content = "dfghdfgdfg".toStringItemDto(),
-            )*/
-            commonUseCase.toast(content = "123123123")
-        }
-
     }
 
 }
