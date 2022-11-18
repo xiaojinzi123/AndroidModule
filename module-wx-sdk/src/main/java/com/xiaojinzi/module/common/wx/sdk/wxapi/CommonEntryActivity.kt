@@ -11,7 +11,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 import com.xiaojinzi.lib.common.res.wx.sdk.WXLoginErrorDto
 import com.xiaojinzi.lib.common.res.wx.sdk.WXLoginSuccessDto
 import com.xiaojinzi.module.common.wx.sdk.WXApi
-import com.xiaojinzi.support.util.EventPublisher
+import com.xiaojinzi.support.ktx.EventPublisher
 
 open class CommonEntryActivity : Activity(), IWXAPIEventHandler {
 

@@ -4,7 +4,7 @@ import com.xiaojinzi.component.anno.ServiceAnno
 import com.xiaojinzi.module.common.base.spi.FFmpegSpi
 import com.xiaojinzi.support.ktx.resumeExceptionIgnoreException
 import com.xiaojinzi.support.ktx.resumeIgnoreException
-import com.xiaojinzi.support.util.LogSupport
+import com.xiaojinzi.support.ktx.LogSupport
 import io.microshow.rxffmpeg.RxFFmpegInvoke
 import kotlin.coroutines.suspendCoroutine
 

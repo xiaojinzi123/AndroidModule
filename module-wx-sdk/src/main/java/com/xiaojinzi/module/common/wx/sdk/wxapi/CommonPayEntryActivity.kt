@@ -8,7 +8,7 @@ import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 import com.xiaojinzi.module.common.wx.sdk.WXApi
-import com.xiaojinzi.support.util.EventPublisher
+import com.xiaojinzi.support.ktx.EventPublisher
 
 open class CommonPayEntryActivity : Activity(), IWXAPIEventHandler {
 

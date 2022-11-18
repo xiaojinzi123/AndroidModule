@@ -6,7 +6,7 @@ import com.xiaojinzi.support.ktx.NormalMutableSharedFlow
 import com.xiaojinzi.support.ktx.newUUid
 import com.xiaojinzi.support.ktx.resumeExceptionIgnoreException
 import com.xiaojinzi.support.ktx.resumeIgnoreException
-import com.xiaojinzi.support.util.LogSupport
+import com.xiaojinzi.support.ktx.LogSupport
 import hu.akarnokd.kotlin.flow.toList
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*

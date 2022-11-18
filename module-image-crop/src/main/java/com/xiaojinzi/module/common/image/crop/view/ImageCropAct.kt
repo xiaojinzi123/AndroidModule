@@ -26,7 +26,7 @@ class ImageCropAct : BaseAct<ImageCropViewModel>() {
 
         setContent {
             StateBar {
-                EditDataViewWrap()
+                ImageCropWrap()
             }
         }
 

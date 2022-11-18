@@ -6,7 +6,7 @@ import com.xiaojinzi.component.anno.ServiceAnno
 import com.xiaojinzi.module.common.base.spi.AlipaySpi
 import com.xiaojinzi.support.ktx.getActivity
 import com.xiaojinzi.support.ktx.notSupportError
-import com.xiaojinzi.support.util.LogSupport
+import com.xiaojinzi.support.ktx.LogSupport
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

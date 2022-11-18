@@ -17,7 +17,7 @@ import com.xiaojinzi.module.common.wx.sdk.WXApi
 import com.xiaojinzi.support.ktx.app
 import com.xiaojinzi.support.ktx.contentWithContext
 import com.xiaojinzi.support.ktx.notSupportError
-import com.xiaojinzi.support.util.LogSupport
+import com.xiaojinzi.support.ktx.LogSupport
 
 
 @ServiceAnno(

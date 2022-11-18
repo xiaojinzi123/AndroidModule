@@ -17,7 +17,7 @@ import com.xiaojinzi.module.common.base.spi.FileUploadTaskDto
 import com.xiaojinzi.module.common.base.spi.TxCosSpi
 import com.xiaojinzi.module.common.tx.cos.MySessionCredentialProvider
 import com.xiaojinzi.support.ktx.*
-import com.xiaojinzi.support.util.LogSupport
+import com.xiaojinzi.support.ktx.LogSupport
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.util.concurrent.ConcurrentHashMap

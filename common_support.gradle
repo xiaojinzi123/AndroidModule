@@ -1,6 +1,5 @@
 ext.getRootProjectPath = {
     def tempProject = project
-    println "path = " + tempProject
     while (tempProject.parent != null) {
         tempProject = tempProject.parent
     }

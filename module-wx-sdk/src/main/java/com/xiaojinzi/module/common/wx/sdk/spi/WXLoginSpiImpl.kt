@@ -5,7 +5,7 @@ import com.xiaojinzi.component.anno.ServiceAnno
 import com.xiaojinzi.lib.common.res.wx.sdk.WXLoginDto
 import com.xiaojinzi.module.common.base.spi.WXLoginSpi
 import com.xiaojinzi.module.common.wx.sdk.WXApi
-import com.xiaojinzi.support.util.EventPublisher
+import com.xiaojinzi.support.ktx.EventPublisher
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.mapNotNull
 
