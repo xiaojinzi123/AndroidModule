@@ -1,8 +1,8 @@
 ext.versions = [
         // 系统级别的版本号
-        android_compile_sdk                 : 32,
+        android_compile_sdk                 : 33,
         android_min_sdk                     : 21, // 不支持7.0以下的系统
-        android_target_sdk                  : 32,
+        android_target_sdk                  : 33,
         // buildToolsVersion                : "31.0.0",
         // 第三方控件的版本号
         rxjava                              : '2.2.21',
