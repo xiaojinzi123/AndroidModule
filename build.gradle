@@ -5,7 +5,7 @@ buildscript {
     apply from: "./common_support.gradle"
 
     ext {
-        compose_version = '1.1.1'
+        compose_version = '1.2.0'
     }
 
     ext.kotlin_version = "1.6.10"
