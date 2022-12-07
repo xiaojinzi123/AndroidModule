@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id 'com.xiaojinzi.component.plugin'
+    id 'com.xiaojinzi.kcomponent.plugin'
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'

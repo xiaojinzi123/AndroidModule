@@ -37,7 +37,7 @@ dependencies {
     api libs.constraintlayout
     api libs.lifecycle_runtime_ktx
     api libs.lifecycle_viewmodel_ktx
-    api libs.component_impl_ktx
+    api libs.component_impl
     api libs.support_init
     api libs.support_annotation
     api libs.support_ktx

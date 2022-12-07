@@ -12,9 +12,9 @@ class DemoApp : Application() {
         AppInstance.app = this
 
         Component.init(
+            application = this,
             isDebug = BuildConfig.DEBUG,
-            config = Config
-                .with(this)
+            config = Config.Builder()
                 .optimizeInit(true)
                 .autoRegisterModule(true)
                 .build()

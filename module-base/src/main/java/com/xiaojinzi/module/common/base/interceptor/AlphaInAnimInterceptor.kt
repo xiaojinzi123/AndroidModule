@@ -2,18 +2,17 @@ package com.xiaojinzi.module.common.base.interceptor
 
 import com.xiaojinzi.component.impl.RouterInterceptor
 import com.xiaojinzi.component.impl.RouterInterceptor.Chain
+import com.xiaojinzi.component.impl.RouterResult
 
 open class AlphaInAnimInterceptor : RouterInterceptor {
 
-    @Throws(Exception::class)
-    override
-    fun intercept(chain: Chain) {
+    override suspend fun intercept(chain: Chain): RouterResult {
         val originRequest = chain.request()
-        val rawActivity = originRequest.rawActivity
-        val originAfterAction = originRequest.afterStartAction
+        val rawActivity = originRequest.rawAliveActivity
+        val originAfterAction = originRequest.afterStartActivityAction
         val request = originRequest
             .toBuilder()
-            .afterStartAction {
+            .afterStartActivityAction {
                 originAfterAction?.invoke()
                 rawActivity?.overridePendingTransition(
                     com.xiaojinzi.lib.common.res.R.anim.alpha_in,
@@ -21,7 +20,10 @@ open class AlphaInAnimInterceptor : RouterInterceptor {
                 )
             }
             .build()
-        chain.proceed(request)
+
+        return chain.proceed(request)
+
     }
+
 
 }
