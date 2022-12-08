@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -12,10 +13,8 @@ android {
 apply from: getRootProjectPath() + "/common_android.gradle"
 apply from: getRootProjectPath() + "/common_kapt_for_component.gradle"
 
-kapt {
-    arguments {
-        arg("ModuleName", "module_common_base")
-    }
+ksp {
+    arg("ModuleName", "module_common_base")
 }
 
 dependencies {

@@ -3,6 +3,6 @@ apply from: getRootProjectPath() + "/common_kapt_for_component.gradle"
 
 dependencies {
     api project(':module-base')
-    kapt libs.component_compiler
+    ksp libs.component_compiler
     kapt libs.room_compiler
 }

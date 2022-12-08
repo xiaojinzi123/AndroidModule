@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -11,10 +12,8 @@ android {
 
 apply from: project.getRootProjectPath() + "/common_module.gradle"
 
-kapt {
-    arguments {
-        arg("ModuleName", "module_common_ffmpeg")
-    }
+ksp {
+    arg("ModuleName", "module_common_ffmpeg")
 }
 
 dependencies {

@@ -3,6 +3,8 @@ package com.xiaojinzi.module.common.demo
 import android.app.Application
 import com.xiaojinzi.component.Component
 import com.xiaojinzi.component.Config
+import com.xiaojinzi.component.impl.service.serviceRequired
+import com.xiaojinzi.module.common.base.spi.AlipaySpi
 import com.xiaojinzi.support.init.AppInstance
 
 class DemoApp : Application() {
