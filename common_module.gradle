@@ -1,5 +1,5 @@
 apply from: getRootProjectPath() + "/common_android.gradle"
-apply from: getRootProjectPath() + "/common_kapt_for_component.gradle"
+apply from: getRootProjectPath() + "/common_ksp_for_component.gradle"
 
 dependencies {
     api project(':module-base')

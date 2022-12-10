@@ -11,7 +11,7 @@ android {
 }
 
 apply from: getRootProjectPath() + "/common_android.gradle"
-apply from: getRootProjectPath() + "/common_kapt_for_component.gradle"
+apply from: getRootProjectPath() + "/common_ksp_for_component.gradle"
 
 ksp {
     arg("ModuleName", "module_common_base")
