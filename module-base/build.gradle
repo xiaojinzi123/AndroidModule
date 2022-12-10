@@ -19,7 +19,7 @@ ksp {
 
 dependencies {
     api project(':lib-resource')
-    kapt libs.component_compiler
+    ksp libs.component_compiler
     api libs.kotlin_stdlib
     api libs.kotlin_android
     api libs.kt_coroutines_core
