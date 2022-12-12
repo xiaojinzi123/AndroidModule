@@ -17,8 +17,8 @@ object CommonServices {
     /**
      * SharedPreference 的服务
      */
-    val spService: SPSpi
-        get() = ServiceManager.requiredGet(SPSpi::class)
+    val spService: SPSpi?
+        get() = ServiceManager.get(SPSpi::class)
 
     /**
      * FFmpeg 的服务
