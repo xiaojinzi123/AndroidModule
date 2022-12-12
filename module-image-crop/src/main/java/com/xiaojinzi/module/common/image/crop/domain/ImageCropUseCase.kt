@@ -98,6 +98,12 @@ interface ImageCropUseCase : BaseUseCase {
     val imageOffsetObservableDto: Flow<Offset>
 
     /**
+     * cropBorder 的最大的限制的位置, 在 10000 * 10000 的容器中.
+     */
+    @HotObservable(HotObservable.Pattern.BEHAVIOR, isShared = true)
+    val cropLimitedRectObservableDto: Flow<Rect>
+
+    /**
      * cropBorder 的位置, 在 10000 * 10000 的容器中.
      */
     @HotObservable(HotObservable.Pattern.BEHAVIOR, isShared = true)
@@ -115,6 +121,16 @@ interface ImageCropUseCase : BaseUseCase {
      * 调整
      */
     fun adjust()
+
+    /**
+     * 设置新的裁剪区域
+     */
+    fun setNewCropRect(newRect: Rect)
+
+    /**
+     * 设置新的图片的偏移
+     */
+    fun setNewTargetImageOffset(newOffset: Offset)
 
 }
 
@@ -163,6 +179,11 @@ class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
         initValue = 1f
     )
 
+    override val cropLimitedRectObservableDto = initImageRectObservableDto
+        .mutableSharedStateIn(
+            scope = scope,
+        )
+
     override val cropRectObservableDto = initImageRectObservableDto
         .mutableSharedStateIn(
             scope = scope,
@@ -199,6 +220,35 @@ class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
                     value = maxOf(minScaleWidth, minScaleHeight)
                 )
             }
+        }
+    }
+
+    override fun setNewCropRect(newRect: Rect) {
+        scope.launch(context = ErrorIgnoreContext) {
+            // 不能超过区域
+            val targetLimitedRect = cropLimitedRectObservableDto.first()
+            val newLimitedRect = newRect.copy(
+                left = newRect.left.coerceIn(targetLimitedRect.left, targetLimitedRect.right),
+                right = newRect.right.coerceIn(targetLimitedRect.left, targetLimitedRect.right),
+                top = newRect.top.coerceIn(targetLimitedRect.top, targetLimitedRect.bottom),
+                bottom = newRect.bottom.coerceIn(targetLimitedRect.top, targetLimitedRect.bottom),
+            )
+            // 进行放大
+            val scale = minOf(
+                a = ImageCropUseCase.CONTAINER_SIZE / newLimitedRect.width,
+                b = ImageCropUseCase.CONTAINER_SIZE / newLimitedRect.height,
+            )
+            cropRectObservableDto.emit(
+                value = newLimitedRect
+            )
+        }
+    }
+
+    override fun setNewTargetImageOffset(newOffset: Offset) {
+        scope.launch(context = ErrorIgnoreContext) {
+            imageOffsetObservableDto.emit(
+                value = newOffset
+            )
         }
     }
 
