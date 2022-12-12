@@ -2,7 +2,7 @@ package com.xiaojinzi.module.common.base.spi
 
 import com.xiaojinzi.support.annotation.NoError
 
-interface WxSdkSpi {
+interface WXSdkSpi {
 
     /**
      * 初始化

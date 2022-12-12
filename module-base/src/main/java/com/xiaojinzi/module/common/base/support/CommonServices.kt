@@ -35,8 +35,8 @@ object CommonServices {
     /**
      * 微信 SDK 的服务
      */
-    val wxSpi: WxSdkSpi?
-        get() = ServiceManager.get(WxSdkSpi::class)
+    val wxSpi: WXSdkSpi?
+        get() = ServiceManager.get(WXSdkSpi::class)
 
     /**
      * 微信登录 的服务

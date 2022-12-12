@@ -46,6 +46,7 @@ dependencies {
     api project(':module-wx-sdk')
     api project(':module-ali-pay')
     api project(':module-image-crop')
+    api project(':module-storage')
     api project(':module-tx-cos')
     api project(':module-base')
     api project(':lib-resource')

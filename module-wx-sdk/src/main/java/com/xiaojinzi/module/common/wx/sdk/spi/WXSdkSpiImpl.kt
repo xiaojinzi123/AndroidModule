@@ -1,13 +1,13 @@
 package com.xiaojinzi.module.common.wx.sdk.spi
 
 import com.xiaojinzi.component.anno.ServiceAnno
-import com.xiaojinzi.module.common.base.spi.WxSdkSpi
+import com.xiaojinzi.module.common.base.spi.WXSdkSpi
 import com.xiaojinzi.module.common.wx.sdk.WXApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-@ServiceAnno(WxSdkSpi::class)
-class WxSdkSpiImpl : WxSdkSpi {
+@ServiceAnno(WXSdkSpi::class)
+class WXSdkSpiImpl : WXSdkSpi {
 
     override suspend fun init(appId: String) {
         WXApi.appId = appId
