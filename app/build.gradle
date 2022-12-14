@@ -23,7 +23,7 @@ android {
                     sourceSets {
                         android.applicationVariants.all { variant ->
                             def variantName = variant.getName()
-                            debug.kotlin.srcDirs("build/generated/ksp/" + variantName + "/kotlin")
+                            debug.kotlin.srcDirs += "build/generated/ksp/" + variantName + "/kotlin"
                         }
                     }
                 }
