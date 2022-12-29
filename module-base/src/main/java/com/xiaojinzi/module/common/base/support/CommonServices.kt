@@ -15,6 +15,12 @@ object CommonServices {
         get() = ServiceManager.get(CommonAppInfoAdapterSpi::class)
 
     /**
+     * 网络的服务
+     */
+    val networkSpi: NetworkSpi?
+        get() = ServiceManager.get(NetworkSpi::class)
+
+    /**
      * SharedPreference 的服务
      */
     val spService: SPSpi?
