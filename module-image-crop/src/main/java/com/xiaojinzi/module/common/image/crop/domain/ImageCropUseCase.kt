@@ -8,8 +8,15 @@ import com.xiaojinzi.module.common.image.crop.R
 import com.xiaojinzi.support.annotation.HotObservable
 import com.xiaojinzi.support.architecture.mvvm1.BaseUseCase
 import com.xiaojinzi.support.architecture.mvvm1.BaseUseCaseImpl
-import com.xiaojinzi.support.ktx.*
+import com.xiaojinzi.support.ktx.ErrorIgnoreContext
+import com.xiaojinzi.support.ktx.InitOnceData
+import com.xiaojinzi.support.ktx.LogSupport
+import com.xiaojinzi.support.ktx.MutableInitOnceData
+import com.xiaojinzi.support.ktx.MutableSharedStateFlow
+import com.xiaojinzi.support.ktx.initOnceData
+import com.xiaojinzi.support.ktx.mutableSharedStateIn
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -73,6 +80,11 @@ interface ImageCropUseCase : BaseUseCase {
 
     }
 
+    /**
+     * 容器对的位置
+     */
+    val containerRect: Rect
+
     val targetImageInitData: InitOnceData<ImageVo>
 
     /**
@@ -96,6 +108,12 @@ interface ImageCropUseCase : BaseUseCase {
      */
     @HotObservable(HotObservable.Pattern.BEHAVIOR, isShared = true)
     val imageOffsetObservableDto: Flow<Offset>
+
+    /**
+     * 图片的真实位置, 进行偏移过了
+     */
+    @HotObservable(HotObservable.Pattern.BEHAVIOR, isShared = false)
+    val imageRectObservableDto: Flow<Rect>
 
     /**
      * cropBorder 的最大的限制的位置, 在 10000 * 10000 的容器中.
@@ -135,6 +153,9 @@ interface ImageCropUseCase : BaseUseCase {
 }
 
 class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
+
+    override val containerRect: Rect =
+        Rect(0f, 0f, ImageCropUseCase.CONTAINER_SIZE, ImageCropUseCase.CONTAINER_SIZE)
 
     override val targetImageInitData: InitOnceData<ImageVo> = MutableInitOnceData(
         initValue = ImageCropUseCase.TestImage,
@@ -179,7 +200,16 @@ class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
         initValue = 1f
     )
 
-    override val cropLimitedRectObservableDto = initImageRectObservableDto
+    override val imageOffsetObservableDto = MutableSharedStateFlow(initValue = Offset.Zero)
+
+    override val imageRectObservableDto = combine(
+        initImageRectObservableDto,
+        imageOffsetObservableDto,
+    ) { initImageRect, imageOffset ->
+        initImageRect.translate(imageOffset)
+    }
+
+    override val cropLimitedRectObservableDto = imageRectObservableDto
         .mutableSharedStateIn(
             scope = scope,
         )
@@ -188,8 +218,6 @@ class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
         .mutableSharedStateIn(
             scope = scope,
         )
-
-    override val imageOffsetObservableDto = MutableSharedStateFlow(initValue = Offset.Zero)
 
     override fun applyImageScaleAndMove(
         scaleOffset: Float,
@@ -245,9 +273,24 @@ class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
     }
 
     override fun setNewTargetImageOffset(newOffset: Offset) {
-        scope.launch(context = ErrorIgnoreContext) {
+        scope.launch() {
+            // 图片的位置
+            val imageRect = initImageRectObservableDto.first()
+            // 图片的位置
+            val cropLimitedRect = cropRectObservableDto.first()
+            val newLimitOffset = newOffset.copy(
+                x = newOffset.x.coerceIn(
+                    minimumValue = cropLimitedRect.right - imageRect.right,
+                    maximumValue = cropLimitedRect.left - imageRect.left,
+                ),
+                y = newOffset.y.coerceIn(
+                    minimumValue = cropLimitedRect.bottom - imageRect.bottom,
+                    maximumValue = cropLimitedRect.top - imageRect.top,
+                ),
+            )
+            // 不能超过区域
             imageOffsetObservableDto.emit(
-                value = newOffset
+                value = newLimitOffset,
             )
         }
     }

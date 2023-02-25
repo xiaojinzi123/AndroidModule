@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.xiaojinzi.support.ktx.LogSupport
 import com.xiaojinzi.support.ktx.nothing
 import kotlin.math.min
 
@@ -349,6 +350,7 @@ private fun ImageCropView() {
                                     }
                                 cropDownTouchDetectionVo != null
                             }
+
                             MotionEvent.ACTION_MOVE -> {
 
                                 println("cropTouchDetectionRectList = $cropTouchDetectionRectList, cropDownPosition = $cropDownPosition, motionEvent = ${motionEvent.x},${motionEvent.y}")
@@ -391,11 +393,13 @@ private fun ImageCropView() {
 
                                 true
                             }
+
                             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                                 cropDownPosition = null
                                 cropDownRect = null
                                 true
                             }
+
                             else -> {
                                 false
                             }
@@ -428,33 +432,48 @@ private fun ImageCropView() {
                                 when (motionEvent.actionMasked) {
                                     MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> {
                                         when (motionEvent.pointerCount) {
-                                            1 -> imageFirstDownPosition = Offset(
-                                                x = motionEvent.x,
-                                                y = motionEvent.y,
-                                            )
+                                            1 -> {
+                                                imageFirstDownPosition = Offset(
+                                                    x = motionEvent.x,
+                                                    y = motionEvent.y,
+                                                )
+                                            }
+
                                             2 -> imageSecondDownPosition = Offset(
                                                 x = motionEvent.x,
                                                 y = motionEvent.y,
                                             )
                                         }
                                     }
+
                                     MotionEvent.ACTION_MOVE -> { // 只计算第一个手指的移动
                                         val targetContainerRatio = containerRatio!!
+                                        // 这里常规理解是移动的点和按下的点进行的差值，但是由于 translation 的 x,y 的改变
+                                        // 新产生的移动点并不是想象中那样从按下的点开始离开很远
+                                        // 比如印象中：按下点是 100, 100, 第一次移动事件 150,100, 表示 x 移动了 50, 继续移动 50 的话, 想象中应该是 200, 100 的位置
+                                        // 但是实际上是：按下点是 100, 100, 第一次移动事件 150,100, 表示 x 移动了 50, 继续移动 50 的话, 实际上还是 150, 100 的位置
+                                        // 所以下面的代码理解上是不改变移动方向一直移动应该是越来越快的, 但是却没有, 实际效果是很好的跟手效果. 这里做一个备注, 防止之后忘记
                                         val diffX =
                                             motionEvent.x - imageFirstDownPosition!!.x
                                         val diffY =
                                             motionEvent.y - imageFirstDownPosition!!.y
+                                        // 在原先的偏移的基础上, 加上当前的偏移
                                         val newOffset = Offset(
                                             x = targetImageOffset.x + diffX,
                                             y = targetImageOffset.y + diffY,
                                         ).times(operand = targetContainerRatio)
+                                        // 设置新的位移的值
                                         vm.setNewTargetImageOffset(
                                             newOffset = newOffset,
                                         )
                                     }
+
                                     MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP -> {
                                         when (motionEvent.pointerCount) {
-                                            1 -> imageFirstDownPosition = null
+                                            1 -> {
+                                                imageFirstDownPosition = null
+                                            }
+
                                             2 -> imageSecondDownPosition = null
                                         }
                                     }
