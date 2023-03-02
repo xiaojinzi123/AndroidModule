@@ -67,7 +67,7 @@ ext.libs = [
 
         // page 的依赖
         page3                       : "androidx.paging:paging-runtime:${versions.page3}",
-        page3_compose               : "androidx.paging:paging-compose:1.0.0-alpha17",
+        page3_compose               : "androidx.paging:paging-compose:1.0.0-alpha18",
 
         // ------------------------ Room 的依赖------------------------
         room                        : "androidx.room:room-runtime:2.5.0",

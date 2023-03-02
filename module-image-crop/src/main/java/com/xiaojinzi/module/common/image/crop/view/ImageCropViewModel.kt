@@ -64,9 +64,7 @@ class ImageCropViewModel(
      * UI 的容器的真实大小
      */
     @HotObservable(HotObservable.Pattern.BEHAVIOR, isShared = true)
-    val viewContainerSizeObservableVo = CacheSharedStateFlow<IntSize>(
-        scope = viewModelScope,
-    ) {
+    val viewContainerSizeObservableVo = CacheSharedStateFlow<IntSize>() {
         if (it.width != it.height) {
             throw IllegalArgumentException("width is not equal to height, width = ${it.width}, height = ${it.height}")
         }
