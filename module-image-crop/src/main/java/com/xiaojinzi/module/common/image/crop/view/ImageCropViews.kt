@@ -2,6 +2,8 @@ package com.xiaojinzi.module.common.image.crop.view
 
 import android.view.MotionEvent
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animateOffsetAsState
+import androidx.compose.animation.core.animateRectAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.xiaojinzi.support.ktx.LogSupport
 import com.xiaojinzi.support.ktx.nothing
 import kotlin.math.min
 
@@ -38,7 +39,9 @@ private fun ImageCropView() {
     val targetImageScaleAnim by animateFloatAsState(targetValue = targetImageScale)
     val widthHeightPercent by vm.imageInitWidthHeightPercentObservableVo.collectAsState(initial = 0f to 0f)
     val targetImageOffset by vm.imageOffsetObservableVo.collectAsState(initial = Offset.Zero)
-    val cropRect by vm.cropRectInitObservableVo.collectAsState(initial = null)
+    val targetImageOffsetAnim by animateOffsetAsState(targetValue = targetImageOffset)
+    val cropRect by vm.cropRectInitObservableVo.collectAsState(initial = Rect.Zero)
+    val cropRectAnim by animateRectAsState(targetValue = cropRect)
     val cropTouchDetectionRectList by vm.cropTouchDetectionRectListObservableVo.collectAsState(
         initial = emptyList()
     )
@@ -95,7 +98,7 @@ private fun ImageCropView() {
                     .background(color = Color.Red)
                     .drawWithContent {
                         this.drawContent()
-                        cropRect?.let { cropRect ->
+                        cropRectAnim?.let { cropRect ->
                             if (!cropRect.isEmpty) {
                                 // 绘制四条边
                                 run {
@@ -333,8 +336,9 @@ private fun ImageCropView() {
                     // 监听手势
                     .pointerInteropFilter { motionEvent ->
                         when (motionEvent.actionMasked) {
+
                             MotionEvent.ACTION_DOWN -> {
-                                cropDownRect = cropRect
+                                cropDownRect = cropRectAnim
                                 cropDownPosition = Offset(
                                     x = motionEvent.x,
                                     y = motionEvent.y,
@@ -352,8 +356,6 @@ private fun ImageCropView() {
                             }
 
                             MotionEvent.ACTION_MOVE -> {
-
-                                println("cropTouchDetectionRectList = $cropTouchDetectionRectList, cropDownPosition = $cropDownPosition, motionEvent = ${motionEvent.x},${motionEvent.y}")
 
                                 val diffX = motionEvent.x - cropDownPosition!!.x
                                 val diffY = motionEvent.y - cropDownPosition!!.y
@@ -397,12 +399,15 @@ private fun ImageCropView() {
                             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                                 cropDownPosition = null
                                 cropDownRect = null
+                                // 对图片的位置进行调整
+                                vm.adjust()
                                 true
                             }
 
                             else -> {
                                 false
                             }
+
                         }
                     }
                     .nothing(),
@@ -425,8 +430,8 @@ private fun ImageCropView() {
                             .graphicsLayer {
                                 this.scaleX = targetImageScaleAnim
                                 this.scaleY = targetImageScaleAnim
-                                this.translationX = targetImageOffset.x
-                                this.translationY = targetImageOffset.y
+                                this.translationX = targetImageOffsetAnim.x
+                                this.translationY = targetImageOffsetAnim.y
                             }
                             .pointerInteropFilter { motionEvent ->
                                 when (motionEvent.actionMasked) {
@@ -459,8 +464,8 @@ private fun ImageCropView() {
                                             motionEvent.y - imageFirstDownPosition!!.y
                                         // 在原先的偏移的基础上, 加上当前的偏移
                                         val newOffset = Offset(
-                                            x = targetImageOffset.x + diffX,
-                                            y = targetImageOffset.y + diffY,
+                                            x = targetImageOffsetAnim.x + diffX,
+                                            y = targetImageOffsetAnim.y + diffY,
                                         ).times(operand = targetContainerRatio)
                                         // 设置新的位移的值
                                         vm.setNewTargetImageOffset(
@@ -473,7 +478,6 @@ private fun ImageCropView() {
                                             1 -> {
                                                 imageFirstDownPosition = null
                                             }
-
                                             2 -> imageSecondDownPosition = null
                                         }
                                     }

@@ -56,27 +56,12 @@ interface ImageCropUseCase : BaseUseCase {
         val ImageList = listOf(
             ImageVo(
                 rsd = R.drawable.test1,
-                width = 3024,
-                height = 4032,
-            ),
-            ImageVo(
-                rsd = R.drawable.test2,
-                width = 4608,
-                height = 3456,
-            ),
-            ImageVo(
-                rsd = R.drawable.test3,
-                width = 3000,
-                height = 4000,
-            ),
-            ImageVo(
-                rsd = R.drawable.test4,
-                width = 1238,
-                height = 4000,
+                width = 4032,
+                height = 2688,
             ),
         )
 
-        val TestImage = ImageList[2]
+        val TestImage = ImageList[0]
 
     }
 
@@ -136,7 +121,7 @@ interface ImageCropUseCase : BaseUseCase {
     )
 
     /**
-     * 调整
+     * 调整图片和裁剪框的位置
      */
     fun adjust()
 
@@ -237,8 +222,27 @@ class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
 
     override fun adjust() {
         scope.launch(context = ErrorIgnoreContext) {
+
+            // 拿到裁剪框的位置
+            val cropRect = cropRectObservableDto.first()
+            // 拿到裁剪框的正中间
+            val cropCenter: Offset = cropRect.center
+
+            // 拿到图片的偏移值
+            val imageOffset = imageOffsetObservableDto.first()
+
+            // 拿到偏移中心点的差值
+            val diffOffset = containerRect.center.minus(other = cropCenter)
+
+            // 目标裁剪框的位置
+            val targetCropRect = cropRect.translate(offset = diffOffset)
+
+            cropRectObservableDto.emit(value = targetCropRect)
+
+            imageOffsetObservableDto.emit(value = imageOffset.plus(other = diffOffset))
+
             // 先处理大小, 如果图片比裁剪的框框小了, 则缩放一下
-            val originImagePosition = initImageRectObservableDto.first()
+            /*val originImagePosition = initImageRectObservableDto.first()
             val imageScale = targetImageScaleObservableDto.first()
             val cropRect = cropRectObservableDto.first()
             val minScaleWidth = cropRect.width / originImagePosition.width
@@ -247,7 +251,7 @@ class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
                 targetImageScaleObservableDto.emit(
                     value = maxOf(minScaleWidth, minScaleHeight)
                 )
-            }
+            }*/
         }
     }
 
