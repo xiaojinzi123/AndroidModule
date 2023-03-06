@@ -1,5 +1,5 @@
 
-apply from: "https://raw.githubusercontent.com/xiaojinzi123/AndroidModuleScript/main/script1/common_android_lib.gradle"
+apply from: getRootProjectPath() + "/common_android_lib.gradle"
 
 android {
     buildFeatures {

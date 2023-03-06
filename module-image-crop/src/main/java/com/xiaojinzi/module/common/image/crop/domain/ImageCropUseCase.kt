@@ -95,6 +95,12 @@ interface ImageCropUseCase : BaseUseCase {
     val imageOffsetObservableDto: Flow<Offset>
 
     /**
+     * 图片的放大比
+     */
+    @HotObservable(HotObservable.Pattern.BEHAVIOR, isShared = true)
+    val imageScaleObservableDto: Flow<Float>
+
+    /**
      * 图片的真实位置, 进行偏移过了
      */
     @HotObservable(HotObservable.Pattern.BEHAVIOR, isShared = false)
@@ -187,6 +193,8 @@ class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
 
     override val imageOffsetObservableDto = MutableSharedStateFlow(initValue = Offset.Zero)
 
+    override val imageScaleObservableDto = MutableSharedStateFlow(initValue = 1f)
+
     override val imageRectObservableDto = combine(
         initImageRectObservableDto,
         imageOffsetObservableDto,
@@ -277,7 +285,7 @@ class ImageCropUseCaseImpl : BaseUseCaseImpl(), ImageCropUseCase {
     }
 
     override fun setNewTargetImageOffset(newOffset: Offset) {
-        scope.launch() {
+        scope.launch(context = ErrorIgnoreContext) {
             // 图片的位置
             val imageRect = initImageRectObservableDto.first()
             // 图片的位置
