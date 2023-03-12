@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.xiaojinzi.support.ktx.LogSupport
 import com.xiaojinzi.support.ktx.nothing
 import kotlin.math.min
 
@@ -414,12 +415,10 @@ private fun ImageCropView() {
             ) {
                 targetImage?.let { targetImage ->
 
-                    var imageFirstDownPosition: Offset? by remember {
-                        mutableStateOf(null)
-                    }
-
-                    var imageSecondDownPosition: Offset? by remember {
-                        mutableStateOf(null)
+                    // 使用的时候不能直接对集合中的值进行修改，需要先复制一份，然后再修改
+                    // 这个存的是每一个按下手指的 ID 和对应的位置
+                    var imageDownPosition: LinkedHashMap<Int, Offset> by remember {
+                        mutableStateOf(LinkedHashMap())
                     }
 
                     Image(
@@ -434,21 +433,20 @@ private fun ImageCropView() {
                                 this.translationY = targetImageOffsetAnim.y
                             }
                             .pointerInteropFilter { motionEvent ->
+                                // 这个只能手指按下和抬起进行使用的
+                                val pointId = motionEvent.getPointerId(motionEvent.actionIndex)
                                 when (motionEvent.actionMasked) {
                                     MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> {
-                                        when (motionEvent.pointerCount) {
-                                            1 -> {
-                                                imageFirstDownPosition = Offset(
-                                                    x = motionEvent.x,
-                                                    y = motionEvent.y,
-                                                )
-                                            }
-
-                                            2 -> imageSecondDownPosition = Offset(
+                                        imageDownPosition = LinkedHashMap(imageDownPosition).apply {
+                                            this[pointId] = Offset(
                                                 x = motionEvent.x,
                                                 y = motionEvent.y,
                                             )
                                         }
+                                        LogSupport.d(
+                                            tag = "我来了",
+                                            content = "motionEvent.actionIndex = ${motionEvent.actionIndex}, imageDownPosition = $imageDownPosition"
+                                        )
                                     }
 
                                     MotionEvent.ACTION_MOVE -> { // 只计算第一个手指的移动
@@ -458,27 +456,36 @@ private fun ImageCropView() {
                                         // 比如印象中：按下点是 100, 100, 第一次移动事件 150,100, 表示 x 移动了 50, 继续移动 50 的话, 想象中应该是 200, 100 的位置
                                         // 但是实际上是：按下点是 100, 100, 第一次移动事件 150,100, 表示 x 移动了 50, 继续移动 50 的话, 实际上还是 150, 100 的位置
                                         // 所以下面的代码理解上是不改变移动方向一直移动应该是越来越快的, 但是却没有, 实际效果是很好的跟手效果. 这里做一个备注, 防止之后忘记
-                                        val diffX =
-                                            motionEvent.x - imageFirstDownPosition!!.x
-                                        val diffY =
-                                            motionEvent.y - imageFirstDownPosition!!.y
-                                        // 在原先的偏移的基础上, 加上当前的偏移
-                                        val newOffset = Offset(
-                                            x = targetImageOffsetAnim.x + diffX,
-                                            y = targetImageOffsetAnim.y + diffY,
-                                        ).times(operand = targetContainerRatio)
-                                        // 设置新的位移的值
-                                        vm.setNewTargetImageOffset(
-                                            newOffset = newOffset,
-                                        )
+                                        // 只跟踪第一个手指
+                                        imageDownPosition.entries.firstOrNull()?.let { entity ->
+                                            val pointerIndex =
+                                                motionEvent.findPointerIndex(entity.key)
+                                            if (pointerIndex > -1) {
+                                                LogSupport.d(
+                                                    tag = "我来了",
+                                                    content = "motionEvent.actionIndex = ${motionEvent.actionIndex}, imageDownPosition = $imageDownPosition"
+                                                )
+                                                val diffX =
+                                                    motionEvent.getX(pointerIndex) - entity.value.x
+                                                val diffY =
+                                                    motionEvent.getY(pointerIndex) - entity.value.y
+                                                // 在原先的偏移的基础上, 加上当前的偏移
+                                                val newOffset = Offset(
+                                                    x = targetImageOffsetAnim.x + diffX,
+                                                    y = targetImageOffsetAnim.y + diffY,
+                                                ).times(operand = targetContainerRatio)
+                                                // 设置新的位移的值
+                                                vm.setNewTargetImageOffset(
+                                                    newOffset = newOffset,
+                                                )
+                                            }
+
+                                        }
                                     }
 
                                     MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP -> {
-                                        when (motionEvent.pointerCount) {
-                                            1 -> {
-                                                imageFirstDownPosition = null
-                                            }
-                                            2 -> imageSecondDownPosition = null
+                                        imageDownPosition = LinkedHashMap(imageDownPosition).apply {
+                                            this.remove(key = pointId)
                                         }
                                     }
                                 }

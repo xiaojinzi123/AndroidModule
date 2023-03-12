@@ -55,7 +55,7 @@ fun CommonErrorDataView(
             modifier = Modifier
                 .size(size = 138.dp)
                 .nothing(),
-            painter = painterResource(id = com.xiaojinzi.lib.common.res.R.drawable.res_error1),
+            painter = painterResource(id = com.xiaojinzi.lib.common.res.R.drawable.common_res_error1),
             contentDescription = null
         )
         Text(
