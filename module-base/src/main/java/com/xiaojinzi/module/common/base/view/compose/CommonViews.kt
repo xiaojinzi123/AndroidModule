@@ -33,7 +33,7 @@ fun CommonInitDataView(
         )
         LottieAnimation(
             modifier = Modifier
-                .widthIn(max = 80.dp)
+                .widthIn(max = 30.dp)
                 .nothing(),
             composition = composition,
             iterations = LottieConstants.IterateForever,

@@ -41,10 +41,10 @@ class MainAct : CommonActivity<MainViewModel>() {
 
         lifecycleScope.launch {
 
-            Router
+            /*Router
                 .with(context = mContext)
                 .hostAndPath(hostAndPath = CommonRouterConfig.SUPPORT_IMAGE_CROP)
-                .forward()
+                .forward()*/
 
         }
 
