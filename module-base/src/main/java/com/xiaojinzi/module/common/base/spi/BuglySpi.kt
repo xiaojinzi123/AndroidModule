@@ -18,6 +18,17 @@ interface BuglySpi {
     fun postCatchException(e: Throwable)
 
     /**
+     * 没有异常
+     */
+    fun tryPostCatchException(e: Throwable) {
+        try {
+            postCatchException(e)
+        } catch (ignore: Throwable) {
+            // ignore
+        }
+    }
+
+    /**
      * 设置渠道信息
      */
     fun setChannel(channel: String)
