@@ -8,7 +8,8 @@ plugins {
 }
 
 android {
-    namespace 'com.xiaojinzi.module.common.demo'
+
+    namespace 'com.xiaojinzi.module.demo'
 
     defaultConfig {
         applicationId "com.xiaojinzi.module.demo"

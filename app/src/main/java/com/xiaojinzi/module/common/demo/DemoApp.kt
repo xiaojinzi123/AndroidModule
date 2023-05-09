@@ -4,7 +4,6 @@ import android.app.Application
 import com.xiaojinzi.component.Component
 import com.xiaojinzi.component.Config
 import com.xiaojinzi.component.impl.service.serviceRequired
-import com.xiaojinzi.module.common.base.spi.AlipaySpi
 import com.xiaojinzi.module.common.base.spi.SPSpi
 import com.xiaojinzi.support.init.AppInstance
 import com.xiaojinzi.support.ktx.AppScope
@@ -35,7 +34,7 @@ class DemoApp : Application() {
 
         Component.init(
             application = this,
-            isDebug = BuildConfig.DEBUG,
+            isDebug = false,
             config = Config.Builder()
                 .optimizeInit(true)
                 .autoRegisterModule(true)
