@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'com.google.devtools.ksp'
-    id 'maven-publish'
+    // id 'maven-publish'
 }
 
 android {
