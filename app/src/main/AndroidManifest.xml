@@ -7,14 +7,14 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:name=".DemoApp"
+        android:name="com.xiaojinzi.module.common.demo.DemoApp"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidModule"
         tools:targetApi="31" >
 
-        <activity android:name=".module.main.view.MainAct" android:exported="true" >
+        <activity android:name="com.xiaojinzi.module.common.demo.module.main.view.MainAct" android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
