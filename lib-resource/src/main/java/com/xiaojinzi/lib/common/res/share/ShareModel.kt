@@ -1,5 +1,6 @@
 package com.xiaojinzi.lib.common.res.share
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import androidx.annotation.Keep
@@ -26,6 +27,8 @@ data class ShareInfoDto(
     // 图片 Id
     @DrawableRes
     val imageRsd: Int? = null,
+    // 图片
+    val imageBitmap: Bitmap? = null,
 ) : Parcelable {
     init {
         when (shareType) {

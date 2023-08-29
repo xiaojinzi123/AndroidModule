@@ -46,13 +46,23 @@ class ShareServiceImplForWX : ShareSpi {
                 }
                 this.title = shareInfo.core.title?.contentWithContext() ?: ""
                 this.description = shareInfo.core.description?.contentWithContext() ?: ""
-                shareInfo.core.imageRsd?.let {
-                    this.setThumbImage(
-                        BitmapFactory.decodeResource(
-                            app.resources,
-                            it,
-                        )
-                    )
+                when {
+                    shareInfo.core.imageBitmap != null -> {
+                        shareInfo.core.imageBitmap?.let {
+                            this.setThumbImage(it)
+                        }
+                    }
+
+                    shareInfo.core.imageRsd != null -> {
+                        shareInfo.core.imageRsd?.let {
+                            this.setThumbImage(
+                                BitmapFactory.decodeResource(
+                                    app.resources,
+                                    it,
+                                )
+                            )
+                        }
+                    }
                 }
             }
             this.scene = scene
