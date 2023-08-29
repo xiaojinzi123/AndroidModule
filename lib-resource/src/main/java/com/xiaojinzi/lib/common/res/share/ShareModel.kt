@@ -10,7 +10,10 @@ import kotlinx.parcelize.Parcelize
 
 enum class ShareType {
     // 分享链接,
-    Link
+    Link,
+
+    // 图片分享
+    Image,
 }
 
 @Keep
@@ -22,19 +25,27 @@ data class ShareInfoDto(
     val title: StringItemDto? = null,
     // 描述
     val description: StringItemDto? = null,
-    // 链接
+    // 分享链接需要用到的链接
     val link: String? = null,
-    // 图片 Id
-    @DrawableRes
-    val imageRsd: Int? = null,
-    // 图片
+    // 分享图片用到的图片
     val imageBitmap: Bitmap? = null,
+    // 缩略图图片 Id
+    @DrawableRes
+    val thumbImageRsd: Int? = null,
+    // 缩略图图片
+    val thumbImageBitmap: Bitmap? = null,
 ) : Parcelable {
     init {
         when (shareType) {
             ShareType.Link -> {
                 if (link.isNullOrEmpty()) {
-                    notSupportError()
+                    notSupportError(message = "link is empty")
+                }
+            }
+
+            ShareType.Image -> {
+                if (imageBitmap == null) {
+                    notSupportError(message = "imageBitmap is null")
                 }
             }
         }
