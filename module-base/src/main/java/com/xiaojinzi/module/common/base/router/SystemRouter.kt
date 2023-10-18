@@ -2,7 +2,9 @@ package com.xiaojinzi.module.common.base.router
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.Settings
+import androidx.annotation.RequiresApi
 import com.xiaojinzi.component.anno.RouterAnno
 import com.xiaojinzi.component.impl.RouterRequest
 import com.xiaojinzi.component.support.ParameterSupport
@@ -56,13 +58,33 @@ fun accessibilitySettings(request: RouterRequest): Intent {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.M)
 @RouterAnno(
     hostAndPath = CommonRouterConfig.SYSTEM_ACTION_MANAGE_OVERLAY_PERMISSION
 )
 fun manageOverlayPermission(request: RouterRequest): Intent {
-    return Intent().apply {
-        this.action = Settings.ACTION_MANAGE_OVERLAY_PERMISSION
+    return Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION).apply {
+        // this.action = Settings.ACTION_MANAGE_OVERLAY_PERMISSION
         this.data = Uri.parse("package:" + app.packageName)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            this.putExtra(
+                Settings.EXTRA_APP_PACKAGE,
+                app.packageName,
+            )
+        }
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@RouterAnno(
+    hostAndPath = CommonRouterConfig.SYSTEM_ACTION_APP_NOTIFICATION_PERMISSION
+)
+fun appNotificationPermission(request: RouterRequest): Intent {
+    return Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+        this.putExtra(
+            Settings.EXTRA_APP_PACKAGE,
+            app.packageName,
+        )
     }
 }
 

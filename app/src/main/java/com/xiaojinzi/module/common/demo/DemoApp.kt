@@ -34,7 +34,7 @@ class DemoApp : Application() {
 
         Component.init(
             application = this,
-            isDebug = false,
+            isDebug = true,
             config = Config.Builder()
                 .optimizeInit(true)
                 .autoRegisterModule(true)

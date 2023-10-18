@@ -1,5 +1,6 @@
 package com.xiaojinzi.module.common.demo.module.main.view
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.material.Text
@@ -41,10 +42,12 @@ class MainAct : CommonActivity<MainViewModel>() {
 
         lifecycleScope.launch {
 
-            /*Router
-                .with(context = mContext)
-                .hostAndPath(hostAndPath = CommonRouterConfig.SUPPORT_IMAGE_CROP)
-                .forward()*/
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Router
+                    .with(context = mContext)
+                    .hostAndPath(hostAndPath = CommonRouterConfig.SYSTEM_ACTION_APP_NOTIFICATION_PERMISSION)
+                    .forward()
+            }*/
 
         }
 
