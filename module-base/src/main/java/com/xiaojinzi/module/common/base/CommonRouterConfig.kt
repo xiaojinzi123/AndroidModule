@@ -30,5 +30,6 @@ object CommonRouterConfig {
 
     const val SYSTEM_IMAGE_PICKER = "$HOST_SYSTEM/imagePicker"
     const val SYSTEM_VIDEO_PICKER = "$HOST_SYSTEM/videoPicker"
+    const val SYSTEM_TAKE_PHONE = "$HOST_SYSTEM/takePhone"
 
 }

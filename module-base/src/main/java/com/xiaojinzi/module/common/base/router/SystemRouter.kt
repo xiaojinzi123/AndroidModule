@@ -3,6 +3,7 @@ package com.xiaojinzi.module.common.base.router
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.provider.MediaStore
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import com.xiaojinzi.component.anno.RouterAnno
@@ -122,5 +123,21 @@ fun videoPicker(request: RouterRequest): Intent {
         },
         "Select Video"
     )
+}
+
+@RouterAnno(
+    hostAndPath = CommonRouterConfig.SYSTEM_TAKE_PHONE
+)
+fun takePhoto(request: RouterRequest): Intent {
+    val outputUri = ParameterSupport.getParcelable<Uri>(
+        bundle = request.bundle,
+        key = "output",
+        defaultValue = null,
+    ) ?: throw IllegalArgumentException("output can not be null")
+    return Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+        this.putExtra(
+            MediaStore.EXTRA_OUTPUT, outputUri,
+        )
+    }
 }
 
