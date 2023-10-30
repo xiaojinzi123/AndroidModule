@@ -32,6 +32,8 @@ class DemoApp : Application() {
         super.onCreate()
         AppInstance.app = this
 
+        LogSupport.logAble = true
+
         Component.init(
             application = this,
             isDebug = true,

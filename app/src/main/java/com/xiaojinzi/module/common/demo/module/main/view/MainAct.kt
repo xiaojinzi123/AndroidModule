@@ -30,6 +30,7 @@ import com.xiaojinzi.component.impl.Router
 import com.xiaojinzi.module.common.base.CommonRouterConfig
 import com.xiaojinzi.module.common.base.usecase.CommonContentView
 import com.xiaojinzi.module.common.base.view.CommonActivity
+import com.xiaojinzi.support.ktx.LogSupport
 import com.xiaojinzi.support.ktx.MutableSharedStateFlow
 import com.xiaojinzi.support.ktx.app
 import com.xiaojinzi.support.ktx.copyFileTo
@@ -125,7 +126,11 @@ class MainAct : CommonActivity<MainViewModel>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 123) {
+        LogSupport.d(
+            tag = "xxxxx",
+            content = "resultCode = $resultCode",
+        )
+        if (requestCode == 123 && resultCode == RESULT_OK) {
             targetImage.value = kotlin.runCatching {
                 uri?.copyFileTo(
                     File(app.cacheDir, "${System.currentTimeMillis()}.jpg")
