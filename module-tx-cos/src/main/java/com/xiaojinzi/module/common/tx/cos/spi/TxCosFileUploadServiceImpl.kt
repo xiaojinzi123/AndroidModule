@@ -16,8 +16,12 @@ import com.xiaojinzi.module.common.base.spi.FileUploadServiceBaseImpl
 import com.xiaojinzi.module.common.base.spi.FileUploadTaskDto
 import com.xiaojinzi.module.common.base.spi.TxCosSpi
 import com.xiaojinzi.module.common.tx.cos.MySessionCredentialProvider
-import com.xiaojinzi.support.ktx.*
+import com.xiaojinzi.support.ktx.AppScope
 import com.xiaojinzi.support.ktx.LogSupport
+import com.xiaojinzi.support.ktx.app
+import com.xiaojinzi.support.ktx.extension
+import com.xiaojinzi.support.ktx.newUUid
+import com.xiaojinzi.support.ktx.notSupportError
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.util.concurrent.ConcurrentHashMap
@@ -30,8 +34,11 @@ class TxCosFileUploadServiceImpl : FileUploadServiceBaseImpl(), TxCosSpi {
     private val TAG = "TxCosFileUploadServiceImpl"
 
     // 存储桶所在地域简称，例如广州地区是 ap-guangzhou
-    private var region: String? = null
-    private var bucket: String? = null
+    private lateinit var region: String
+    private lateinit var bucket: String
+
+    // 默认的 subPath
+    private lateinit var defaultSubPath: String
 
     // 创建 CosXmlServiceConfig 对象，根据需要修改默认的配置参数
     private var serviceConfig: CosXmlServiceConfig? = null
@@ -46,9 +53,14 @@ class TxCosFileUploadServiceImpl : FileUploadServiceBaseImpl(), TxCosSpi {
 
     private val taskMap: ConcurrentHashMap<String, COSXMLUploadTask> = ConcurrentHashMap()
 
-    override suspend fun init(region: String, bucket: String) {
+    override suspend fun init(
+        region: String,
+        bucket: String,
+        defaultSubPath: String,
+    ) {
         this.region = region
         this.bucket = bucket
+        this.defaultSubPath = defaultSubPath
         serviceConfig = CosXmlServiceConfig.Builder()
             .setRegion(region)
             // 使用 HTTPS 请求, 默认为 HTTP 请求
@@ -69,11 +81,30 @@ class TxCosFileUploadServiceImpl : FileUploadServiceBaseImpl(), TxCosSpi {
 
         // 存储桶名称，由 bucketname-appid 组成，appid必须填入，可以在COS控制台查看存储桶名称。 https://console.cloud.tencent.com/cos5/bucket
 
-        if (region == null || bucket == null || serviceConfig == null || cosXmlService == null || transferManager == null) {
+        if (serviceConfig == null || cosXmlService == null || transferManager == null) {
             notSupportError()
         }
 
-        val cosPath = "app/${newUUid()}.${task.targetFile.name.extension}" // 对象在存储桶中的位置标识符，即称对象键
+        val subPath = when (val extend = task.extend) {
+            is TxCosSpi.Companion.FileUploadTaskExtendDtoImpl -> {
+                if (extend.subPath.endsWith(char = '/')) {
+                    extend.subPath
+                } else {
+                    "${extend.subPath}/"
+                }
+            }
+
+            else -> {
+                if (defaultSubPath.endsWith(char = '/')) {
+                    defaultSubPath
+                } else {
+                    "$defaultSubPath/"
+                }
+            }
+        }
+
+        val cosPath =
+            "$subPath${newUUid()}.${task.targetFile.name.extension}" // 对象在存储桶中的位置标识符，即称对象键
 
         val srcPath: String = task.targetFile.path
 
@@ -91,7 +122,7 @@ class TxCosFileUploadServiceImpl : FileUploadServiceBaseImpl(), TxCosSpi {
         //设置上传进度回调
         cosXmlUploadTask.setCosXmlProgressListener { complete, target ->
             postProgress(
-                uuid = task.uuid,
+                uid = task.uuid,
                 progress = if (target <= 0) {
                     0f
                 } else {

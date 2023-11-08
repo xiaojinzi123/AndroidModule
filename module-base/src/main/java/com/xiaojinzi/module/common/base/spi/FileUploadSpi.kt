@@ -178,29 +178,43 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
     private val taskMap: ConcurrentHashMap<String, FileUploadTaskDto> =
         ConcurrentHashMap<String, FileUploadTaskDto>()
 
-    fun postProgress(uuid: String, progress: Float) {
+    fun postProgress(uid: String, progress: Float) {
         LogSupport.d(
             tag = FileUploadSpi.TAG,
-            content = "postProgress: uuid = $uuid, progress = $progress"
+            content = "postProgress: uid = $uid, progress = $progress",
         )
-        taskMap[uuid]?.let { task ->
+        taskMap[uid]?.let { task ->
             progressObservableDto.tryEmit(value = FileUploadProgressDto(task, progress))
         }
     }
 
     fun postComplete(uid: String, url: String) {
+        LogSupport.d(
+            tag = FileUploadSpi.TAG,
+            content = "postComplete: uid = $uid, url = $url",
+        )
         taskMap.remove(uid)?.let { task ->
-            completeObservableDto.tryEmit(value = FileUploadCompleteDto(task, url))
+            completeObservableDto.tryEmit(
+                value = FileUploadCompleteDto(task, url)
+            )
         }
     }
 
     fun postFail(uid: String, error: Exception) {
+        LogSupport.d(
+            tag = FileUploadSpi.TAG,
+            content = "postFail: uid = $uid, error = ${error.message}",
+        )
         taskMap.remove(uid)?.let { task ->
             failObservableDto.tryEmit(value = FileUploadFailDto(task, error))
         }
     }
 
     fun postCancel(uid: String) {
+        LogSupport.d(
+            tag = FileUploadSpi.TAG,
+            content = "postCancel: uid = $uid",
+        )
         taskMap.remove(uid)?.let { task ->
             cancelObservableDto.tryEmit(value = task)
         }
@@ -243,6 +257,11 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
                 // 提交上传的任务
                 prepareDoUpload(task = task)
             }
+        }.apply {
+            LogSupport.d(
+                tag = FileUploadSpi.TAG,
+                content = "upload success: task = $task, result = $this",
+            )
         }
     }
 
