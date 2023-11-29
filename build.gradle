@@ -5,11 +5,11 @@ buildscript {
     apply from: "./common_support.gradle"
 
     ext {
-        compose_version = '1.2.0'
+        compose_version = '1.5.1'
     }
 
-    ext.kotlin_version = "1.7.0"
-    ext.kotlin_coroutines_version = "1.6.4"
+    ext.kotlin_version = "1.9.0"
+    ext.kotlin_coroutines_version = "1.7.3"
 
     ext.component_router_doc_folder = "./Doc"
     ext.component_router_doc_enable = false
@@ -32,5 +32,5 @@ buildscript {
 }
 
 plugins {
-    id 'com.google.devtools.ksp' version "$kotlin_version-1.0.6" apply false
+    id 'com.google.devtools.ksp' version "$kotlin_version-1.0.13" apply false
 }

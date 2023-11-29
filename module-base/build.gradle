@@ -73,7 +73,6 @@ dependencies {
     api libs.activity_compose
     api libs.compose_viewmodel
 
-    api libs.accompanist_insets
     api libs.accompanist_pager
     api libs.accompanist_swiperefresh
     api libs.accompanist_sysuicontrol
@@ -82,6 +81,7 @@ dependencies {
     api libs.accompanist_permissions
     api libs.accompanist_webview
 
+    api platform(libs.compose_bom)
     api libs.compose_ui
     api libs.compose_material
     api libs.compose_ui_tooling
