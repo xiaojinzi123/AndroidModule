@@ -23,6 +23,7 @@ android {
             keyPassword '123123'
         }
     }
+
     namespace 'com.xiaojinzi.module.demo'
 
     defaultConfig {
@@ -48,6 +49,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
 }
