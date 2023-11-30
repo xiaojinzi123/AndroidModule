@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'com.google.devtools.ksp'
-    // id 'maven-publish'
+    id 'maven-publish'
 }
 
 android {
@@ -20,3 +20,5 @@ ksp {
 dependencies {
     implementation 'com.alipay.sdk:alipaysdk-android:15.8.11@aar'
 }
+
+apply from: "../common_publish.gradle"

@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'com.google.devtools.ksp'
-    // id 'maven-publish'
+    id 'maven-publish'
 }
 
 android {
@@ -89,4 +89,6 @@ dependencies {
     api libs.compose_constraintlayout
 
 }
+
+apply from: "../common_publish.gradle"
 

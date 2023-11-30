@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'com.google.devtools.ksp'
-    // id 'maven-publish'
+    id 'maven-publish'
 }
 
 android {
@@ -20,3 +20,5 @@ ksp {
 dependencies {
     implementation 'com.tencent.bugly:crashreport:4.0.4'
 }
+
+apply from: "../common_publish.gradle"
