@@ -225,29 +225,53 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
             suspendCancellableCoroutine { cot ->
                 val tempScope = MainScope()
                 completeObservableDto
-                    .filter { it.task == task }
+                    .filter {
+                        (it.task == task).apply {
+                            LogSupport.d(
+                                tag = FileUploadSpi.TAG,
+                                content = "upload completeObservableDto: task = $task, it.task = ${it.task}, result = $this",
+                            )
+                        }
+                    }
                     .onEach {
                         cot.resumeIgnoreException(value = it)
                         tempScope.cancel()
                     }
+                    .flowOn(context = Dispatchers.Default)
                     .launchIn(scope = tempScope)
                 failObservableDto
-                    .filter { it.task == task }
+                    .filter {
+                        (it.task == task).apply {
+                            LogSupport.d(
+                                tag = FileUploadSpi.TAG,
+                                content = "upload failObservableDto: task = $task, it.task = ${it.task}, result = $this",
+                            )
+                        }
+                    }
                     .onEach {
                         cot.resumeExceptionIgnoreException(
                             exception = it.error,
                         )
                         tempScope.cancel()
                     }
+                    .flowOn(context = Dispatchers.Default)
                     .launchIn(scope = tempScope)
                 cancelObservableDto
-                    .filter { it == task }
+                    .filter {
+                        (it == task).apply {
+                            LogSupport.d(
+                                tag = FileUploadSpi.TAG,
+                                content = "upload cancelObservableDto: task = $task, it = $it, result = $this",
+                            )
+                        }
+                    }
                     .onEach {
                         cot.resumeExceptionIgnoreException(
                             exception = Exception("canceled"),
                         )
                         tempScope.cancel()
                     }
+                    .flowOn(context = Dispatchers.Default)
                     .launchIn(scope = tempScope)
                 // 取消的时候执行
                 cot.invokeOnCancellation {
