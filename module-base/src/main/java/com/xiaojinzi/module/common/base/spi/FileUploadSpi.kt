@@ -2,6 +2,7 @@ package com.xiaojinzi.module.common.base.spi
 
 import androidx.annotation.Keep
 import com.xiaojinzi.support.annotation.HotObservable
+import com.xiaojinzi.support.ktx.AppScope
 import com.xiaojinzi.support.ktx.NormalMutableSharedFlow
 import com.xiaojinzi.support.ktx.newUUid
 import com.xiaojinzi.support.ktx.resumeExceptionIgnoreException
@@ -166,11 +167,11 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
 
     override val progressObservableDto = NormalMutableSharedFlow<FileUploadProgressDto>()
 
-    override val completeObservableDto = NormalMutableSharedFlow<FileUploadCompleteDto>()
+    final override val completeObservableDto = NormalMutableSharedFlow<FileUploadCompleteDto>()
 
-    override val failObservableDto = NormalMutableSharedFlow<FileUploadFailDto>()
+    final override val failObservableDto = NormalMutableSharedFlow<FileUploadFailDto>()
 
-    override val cancelObservableDto = NormalMutableSharedFlow<FileUploadTaskDto>()
+    final override val cancelObservableDto = NormalMutableSharedFlow<FileUploadTaskDto>()
 
     /**
      * 任务的 map
@@ -196,7 +197,12 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
         taskMap.remove(uid)?.let { task ->
             completeObservableDto.tryEmit(
                 value = FileUploadCompleteDto(task, url)
-            )
+            ).apply {
+                LogSupport.d(
+                    tag = FileUploadSpi.TAG,
+                    content = "postComplete: uid = $uid, url = $url, result = $this",
+                )
+            }
         }
     }
 
@@ -206,7 +212,12 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
             content = "postFail: uid = $uid, error = ${error.message}",
         )
         taskMap.remove(uid)?.let { task ->
-            failObservableDto.tryEmit(value = FileUploadFailDto(task, error))
+            failObservableDto.tryEmit(value = FileUploadFailDto(task, error)).apply {
+                LogSupport.d(
+                    tag = FileUploadSpi.TAG,
+                    content = "postFail: uid = $uid, error = ${error.message}, result = $this",
+                )
+            }
         }
     }
 
@@ -216,7 +227,12 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
             content = "postCancel: uid = $uid",
         )
         taskMap.remove(uid)?.let { task ->
-            cancelObservableDto.tryEmit(value = task)
+            cancelObservableDto.tryEmit(value = task).apply {
+                LogSupport.d(
+                    tag = FileUploadSpi.TAG,
+                    content = "postCancel: uid = $uid, result = $this",
+                )
+            }
         }
     }
 
@@ -334,6 +350,40 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
     override fun submitTask(task: FileUploadTaskDto): String {
         prepareDoUpload(task = task)
         return task.uuid
+    }
+
+    init {
+
+        completeObservableDto
+            .onEach {
+                LogSupport.d(
+                    tag = FileUploadSpi.TAG,
+                    content = "${FileUploadSpi.TAG} init subscribe completeObservableDto, value: $it"
+                )
+            }
+            .flowOn(context = Dispatchers.Default)
+            .launchIn(scope = AppScope)
+
+        failObservableDto
+            .onEach {
+                LogSupport.d(
+                    tag = FileUploadSpi.TAG,
+                    content = "${FileUploadSpi.TAG} init subscribe failObservableDto, value: $it"
+                )
+            }
+            .flowOn(context = Dispatchers.Default)
+            .launchIn(scope = AppScope)
+
+        cancelObservableDto
+            .onEach {
+                LogSupport.d(
+                    tag = FileUploadSpi.TAG,
+                    content = "${FileUploadSpi.TAG} init subscribe failObservableDto, value: $it"
+                )
+            }
+            .flowOn(context = Dispatchers.Default)
+            .launchIn(scope = AppScope)
+
     }
 
 }
