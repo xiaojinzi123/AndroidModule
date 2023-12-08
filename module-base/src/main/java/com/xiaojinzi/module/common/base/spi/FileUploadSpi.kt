@@ -2,15 +2,34 @@ package com.xiaojinzi.module.common.base.spi
 
 import androidx.annotation.Keep
 import com.xiaojinzi.support.annotation.HotObservable
+import com.xiaojinzi.support.annotation.MillisecondTime
 import com.xiaojinzi.support.ktx.AppScope
+import com.xiaojinzi.support.ktx.LogSupport
 import com.xiaojinzi.support.ktx.NormalMutableSharedFlow
 import com.xiaojinzi.support.ktx.newUUid
 import com.xiaojinzi.support.ktx.resumeExceptionIgnoreException
 import com.xiaojinzi.support.ktx.resumeIgnoreException
-import com.xiaojinzi.support.ktx.LogSupport
 import hu.akarnokd.kotlin.flow.toList
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
@@ -54,6 +73,13 @@ interface FileUploadSpi {
     companion object {
         const val TAG = "FileUploadSpi"
     }
+
+    /**
+     * 完成、失败、取消事件的延迟时间
+     * 内部会保持最低 200ms 的延迟
+     */
+    @MillisecondTime
+    var postEventDelayTime: Long
 
     /**
      * 所有任务的进度
@@ -165,6 +191,14 @@ interface FileUploadSpi {
 
 abstract class FileUploadServiceBaseImpl : FileUploadSpi {
 
+    override var postEventDelayTime: Long = 800
+        set(value) {
+            if (value < 200) {
+                throw IllegalArgumentException("postEventDelayTime must >= 200")
+            }
+            field = value
+        }
+
     override val progressObservableDto = NormalMutableSharedFlow<FileUploadProgressDto>()
 
     final override val completeObservableDto = NormalMutableSharedFlow<FileUploadCompleteDto>()
@@ -190,48 +224,57 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
     }
 
     fun postComplete(uid: String, url: String) {
-        LogSupport.d(
-            tag = FileUploadSpi.TAG,
-            content = "postComplete: uid = $uid, url = $url",
-        )
-        taskMap.remove(uid)?.let { task ->
-            completeObservableDto.tryEmit(
-                value = FileUploadCompleteDto(task, url)
-            ).apply {
-                LogSupport.d(
-                    tag = FileUploadSpi.TAG,
-                    content = "postComplete: uid = $uid, url = $url, result = $this",
-                )
+        AppScope.launch {
+            delay(postEventDelayTime)
+            LogSupport.d(
+                tag = FileUploadSpi.TAG,
+                content = "postComplete: uid = $uid, url = $url",
+            )
+            taskMap.remove(uid)?.let { task ->
+                completeObservableDto.tryEmit(
+                    value = FileUploadCompleteDto(task, url)
+                ).apply {
+                    LogSupport.d(
+                        tag = FileUploadSpi.TAG,
+                        content = "postComplete: uid = $uid, url = $url, result = $this",
+                    )
+                }
             }
         }
     }
 
     fun postFail(uid: String, error: Exception) {
-        LogSupport.d(
-            tag = FileUploadSpi.TAG,
-            content = "postFail: uid = $uid, error = ${error.message}",
-        )
-        taskMap.remove(uid)?.let { task ->
-            failObservableDto.tryEmit(value = FileUploadFailDto(task, error)).apply {
-                LogSupport.d(
-                    tag = FileUploadSpi.TAG,
-                    content = "postFail: uid = $uid, error = ${error.message}, result = $this",
-                )
+        AppScope.launch {
+            delay(postEventDelayTime)
+            LogSupport.d(
+                tag = FileUploadSpi.TAG,
+                content = "postFail: uid = $uid, error = ${error.message}",
+            )
+            taskMap.remove(uid)?.let { task ->
+                failObservableDto.tryEmit(value = FileUploadFailDto(task, error)).apply {
+                    LogSupport.d(
+                        tag = FileUploadSpi.TAG,
+                        content = "postFail: uid = $uid, error = ${error.message}, result = $this",
+                    )
+                }
             }
         }
     }
 
     fun postCancel(uid: String) {
-        LogSupport.d(
-            tag = FileUploadSpi.TAG,
-            content = "postCancel: uid = $uid",
-        )
-        taskMap.remove(uid)?.let { task ->
-            cancelObservableDto.tryEmit(value = task).apply {
-                LogSupport.d(
-                    tag = FileUploadSpi.TAG,
-                    content = "postCancel: uid = $uid, result = $this",
-                )
+        AppScope.launch {
+            delay(postEventDelayTime)
+            LogSupport.d(
+                tag = FileUploadSpi.TAG,
+                content = "postCancel: uid = $uid",
+            )
+            taskMap.remove(uid)?.let { task ->
+                cancelObservableDto.tryEmit(value = task).apply {
+                    LogSupport.d(
+                        tag = FileUploadSpi.TAG,
+                        content = "postCancel: uid = $uid, result = $this",
+                    )
+                }
             }
         }
     }
