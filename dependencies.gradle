@@ -7,8 +7,8 @@ ext.versions = [
         // 第三方控件的版本号
         rxjava                              : '2.2.21',
         rxandroid                           : "2.1.1",
-        component_version                   : "v1.0.4",
-        android_support_version             : "v1.0-beta197",
+        component_version                   : "fdec93b0cd",
+        android_support_version             : "v1.0-beta198",
         compose_version                     : "1.5.4",
         compose_material_version            : "1.5.4",
         compose_material3_version           : "1.0.1",
