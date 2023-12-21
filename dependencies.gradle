@@ -8,7 +8,7 @@ ext.versions = [
         rxjava                              : '2.2.21',
         rxandroid                           : "2.1.1",
         component_version                   : "fdec93b0cd",
-        android_support_version             : "v1.0-beta198",
+        android_support_version             : "v1.0-beta200",
         compose_version                     : "1.5.4",
         compose_material_version            : "1.5.4",
         compose_material3_version           : "1.0.1",
@@ -71,10 +71,10 @@ ext.libs = [
         page3_compose               : "androidx.paging:paging-compose:${versions.page3}",
 
         // ------------------------ Room 的依赖------------------------
-        room                        : "androidx.room:room-runtime:2.6.0",
-        room_compiler               : "androidx.room:room-compiler:2.6.0",
-        room_ktx                    : "androidx.room:room-ktx:2.6.0",
-        room_rxjava                 : "androidx.room:room-rxjava2:2.6.0",
+        room                        : "androidx.room:room-runtime:2.6.1",
+        room_compiler               : "androidx.room:room-compiler:2.6.1",
+        room_ktx                    : "androidx.room:room-ktx:2.6.1",
+        room_rxjava                 : "androidx.room:room-rxjava2:2.6.1",
 
         // ------------------------ Compose 的依赖  ------------------------
 
@@ -89,7 +89,7 @@ ext.libs = [
         accompanist_webview         : "com.google.accompanist:accompanist-webview:${versions.accompanist_version}",
 
         compose_viewmodel           : 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2',
-        activity_compose            : 'androidx.activity:activity-compose:1.8.1',
+        activity_compose            : 'androidx.activity:activity-compose:1.8.2',
         compose_ui                  : "androidx.compose.ui:ui:${versions.compose_version}",
         compose_material            : "androidx.compose.material:material:${versions.compose_material_version}",
         compose_material3           : "androidx.compose.material3:material3:${versions.compose_material3_version}",
