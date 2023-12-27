@@ -1,13 +1,18 @@
 package com.xiaojinzi.module.common.base.spi
 
 import android.app.Application
+import android.content.Context
 
+/**
+ * 接入文档：
+ * https://bugly.tds.qq.com/docs/sdk/android
+ */
 interface Bugly1Spi {
 
     /**
      * 初始化
      */
-    suspend fun init(
+    fun init(
         app: Application,
         isDebugMode: Boolean = false,
         appId: String,
@@ -18,9 +23,28 @@ interface Bugly1Spi {
     )
 
     /**
+     * 设置自定义数据
+     */
+    fun putUserData(
+        context: Context,
+        key: String,
+        value: String,
+    )
+
+    /**
      * 测试崩溃
      */
-    suspend fun testJavaCrash()
+    fun testJavaCrash()
+
+    /**
+     * 测试崩溃
+     */
+    fun testAnrCrash()
+
+    /**
+     * 测试崩溃
+     */
+    fun testNativeCrash()
 
     /**
      * post 抓住了的异常

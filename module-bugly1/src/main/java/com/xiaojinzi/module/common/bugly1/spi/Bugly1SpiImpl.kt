@@ -1,6 +1,7 @@
 package com.xiaojinzi.module.common.bugly1.spi
 
 import android.app.Application
+import android.content.Context
 import com.tencent.bugly.library.Bugly
 import com.tencent.bugly.library.BuglyAppVersionMode
 import com.tencent.bugly.library.BuglyBuilder
@@ -11,7 +12,7 @@ import com.xiaojinzi.module.common.base.spi.Bugly1Spi
 @ServiceAnno(Bugly1Spi::class)
 class Bugly1SpiImpl : Bugly1Spi {
 
-    override suspend fun init(
+    override fun init(
         app: Application,
         isDebugMode: Boolean,
         appId: String,
@@ -24,7 +25,11 @@ class Bugly1SpiImpl : Bugly1Spi {
             app,
             BuglyBuilder(appId, appKey).apply {
                 this.debugMode = isDebugMode
-                this.logLevel = BuglyLogLevel.LEVEL_OFF
+                this.logLevel = if (isDebugMode) {
+                    BuglyLogLevel.LEVEL_DEBUG
+                } else {
+                    BuglyLogLevel.LEVEL_OFF
+                }
                 this.userId = userId
                 this.appChannel = appChannel
                 this.buildNumber = buildNumber
@@ -37,8 +42,26 @@ class Bugly1SpiImpl : Bugly1Spi {
         )
     }
 
-    override suspend fun testJavaCrash() {
+    override fun putUserData(
+        context: Context,
+        key: String,
+        value: String,
+    ) {
+        Bugly.putUserData(
+            context, key, value,
+        )
+    }
+
+    override fun testJavaCrash() {
         Bugly.testCrash(Bugly.JAVA_CRASH)
+    }
+
+    override fun testAnrCrash() {
+        Bugly.testCrash(Bugly.ANR_CRASH)
+    }
+
+    override fun testNativeCrash() {
+        Bugly.testCrash(Bugly.NATIVE_CRASH)
     }
 
     override fun postCatchException(
@@ -51,6 +74,5 @@ class Bugly1SpiImpl : Bugly1Spi {
             Thread.currentThread(), e, extraMsg, extraData, true,
         )
     }
-
 
 }

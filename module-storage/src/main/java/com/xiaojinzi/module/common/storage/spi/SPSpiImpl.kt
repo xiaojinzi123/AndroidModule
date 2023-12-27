@@ -5,6 +5,9 @@ import com.xiaojinzi.component.anno.ServiceAnno
 import com.xiaojinzi.module.common.base.spi.SPSpi
 import com.xiaojinzi.support.ktx.app
 
+/**
+ * SP 的实现
+ */
 @ServiceAnno(SPSpi::class)
 class SPSpiImpl: SPSpi {
 

@@ -5,6 +5,7 @@ import com.xiaojinzi.component.Component
 import com.xiaojinzi.component.Config
 import com.xiaojinzi.component.impl.service.serviceRequired
 import com.xiaojinzi.module.common.base.spi.SPSpi
+import com.xiaojinzi.module.common.base.support.CommonServices
 import com.xiaojinzi.support.init.AppInstance
 import com.xiaojinzi.support.ktx.AppScope
 import com.xiaojinzi.support.ktx.ErrorIgnoreContext
@@ -44,6 +45,15 @@ class DemoApp : Application() {
         )
 
         SPSpi::class.serviceRequired()
+
+        CommonServices
+            .bugly1Spi
+            ?.init(
+                app = this,
+                isDebugMode = true,
+                appId = "d602a40137",
+                appKey = "4a76894a-b292-44e3-b5c8-86c81249548f",
+            )
 
         flow1
             .onEach {

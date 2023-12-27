@@ -28,6 +28,7 @@ import coil.decode.VideoFrameDecoder
 import coil.request.ImageRequest
 import com.xiaojinzi.component.impl.Router
 import com.xiaojinzi.module.common.base.CommonRouterConfig
+import com.xiaojinzi.module.common.base.support.CommonServices
 import com.xiaojinzi.module.common.base.usecase.CommonContentView
 import com.xiaojinzi.module.common.base.view.CommonActivity
 import com.xiaojinzi.support.ktx.LogSupport
@@ -108,6 +109,23 @@ class MainAct : CommonActivity<MainViewModel>() {
                         }
                     ) {
                         Text(text = "点我拍照")
+                    }
+
+                    Spacer(
+                        modifier = Modifier
+                            .navigationBarsPadding()
+                            .height(height = 20.dp)
+                            .nothing()
+                    )
+
+                    Button(
+                        onClick = {
+                            CommonServices
+                                .bugly1Spi
+                                ?.testAnrCrash()
+                        }
+                    ) {
+                        Text(text = "testJavaCrash")
                     }
 
                     Spacer(
