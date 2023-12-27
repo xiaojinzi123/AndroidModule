@@ -1,0 +1,24 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.xiaojinzi.module.common.bugly1'
+}
+
+apply from: project.getRootProjectPath() + "/common_module.gradle"
+
+ksp {
+    arg("ModuleName", "module_common_bugly1")
+}
+
+dependencies {
+    implementation "com.tencent.bugly:bugly-pro:4.3.2.2"
+}
+
+apply from: "../common_publish.gradle"

@@ -61,7 +61,8 @@ apply from: getRootProjectPath() + "/common_android.gradle"
 apply from: getRootProjectPath() + "/common_ksp_for_component.gradle"
 
 dependencies {
-    api project(':module-bugly')
+    // api project(':module-bugly')
+    api project(':module-bugly1')
     api project(':module-ffmpeg')
     api project(':module-wx-sdk')
     api project(':module-ali-pay')

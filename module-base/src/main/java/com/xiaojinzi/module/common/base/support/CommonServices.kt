@@ -39,6 +39,12 @@ object CommonServices {
         get() = ServiceManager.get(BuglySpi::class)
 
     /**
+     * Bugly 的服务
+     */
+    val bugly1Spi: Bugly1Spi?
+        get() = ServiceManager.get(Bugly1Spi::class)
+
+    /**
      * 微信 SDK 的服务
      */
     val wxSpi: WXSdkSpi?
