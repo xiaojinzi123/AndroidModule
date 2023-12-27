@@ -24,8 +24,8 @@ class BuglySpiImpl : BuglySpi {
         CrashReport.setAppChannel(app, channel)
     }
 
-    override fun setUserId(channel: String) {
-        CrashReport.setUserId(app, channel)
+    override fun setUserId(userId: String) {
+        CrashReport.setUserId(app, userId)
     }
 
 }

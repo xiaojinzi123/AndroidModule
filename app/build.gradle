@@ -28,6 +28,9 @@ android {
 
     defaultConfig {
         applicationId "com.xiaojinzi.module.demo"
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
     }
 
     buildTypes {
