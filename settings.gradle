@@ -21,9 +21,7 @@ rootProject.name = "AndroidModule"
 include ':app'
 
 include ':lib-resource'
-
 include ':module-base'
-
 include ':module-ffmpeg'
 include ':module-bugly'
 include ':module-wx-sdk'
@@ -32,3 +30,4 @@ include ':module-tx-cos'
 include ':module-image-crop'
 include ':module-storage'
 include ':module-bugly1'
+include ':module-develop'

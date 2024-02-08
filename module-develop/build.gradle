@@ -1,0 +1,23 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.xiaojinzi.module.common.develop'
+}
+
+apply from: project.getRootProjectPath() + "/common_module.gradle"
+
+ksp {
+    arg("ModuleName", "module_common_develop")
+}
+
+dependencies {
+}
+
+apply from: "../common_publish.gradle"
