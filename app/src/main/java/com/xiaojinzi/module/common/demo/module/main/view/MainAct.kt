@@ -19,7 +19,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.lifecycleScope
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.decode.GifDecoder
@@ -37,12 +36,11 @@ import com.xiaojinzi.support.ktx.app
 import com.xiaojinzi.support.ktx.copyFileTo
 import com.xiaojinzi.support.ktx.nothing
 import com.xiaojinzi.support.ktx.translateStatusBar
-import kotlinx.coroutines.launch
 import java.io.File
 
 class MainAct : CommonActivity<MainViewModel>() {
 
-    private var uri : Uri? = null
+    private var uri: Uri? = null
 
     private val targetImage = MutableSharedStateFlow<File?>(
         initValue = null,
@@ -67,9 +65,8 @@ class MainAct : CommonActivity<MainViewModel>() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-
             val targetImage by targetImage.collectAsState(initial = null)
-            CommonContentView<MainViewModel>() {
+            CommonContentView<MainViewModel> {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -137,7 +134,6 @@ class MainAct : CommonActivity<MainViewModel>() {
 
                 }
             }
-
         }
 
     }
