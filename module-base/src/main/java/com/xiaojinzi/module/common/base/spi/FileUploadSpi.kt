@@ -41,6 +41,8 @@ sealed class FileUploadTaskExtendDto
 
 @Keep
 data class FileUploadTaskDto(
+    // 用于最终文件的名称前缀
+    val extendPrefix: String = "",
     val uuid: String = newUUid(),
     val targetFile: File,
     val extend: FileUploadTaskExtendDto? = null,
@@ -374,7 +376,7 @@ abstract class FileUploadServiceBaseImpl : FileUploadSpi {
     }
 
     /**
-     * 执行上传
+     * 执行上传, 内部异步去做就好了
      */
     abstract fun doUpload(task: FileUploadTaskDto)
 

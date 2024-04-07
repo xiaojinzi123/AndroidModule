@@ -104,7 +104,13 @@ class TxCosFileUploadServiceImpl : FileUploadServiceBaseImpl(), TxCosSpi {
         }
 
         val cosPath =
-            "$subPath${newUUid()}.${task.targetFile.name.extension}" // 对象在存储桶中的位置标识符，即称对象键
+            "$subPath${
+                if(task.extendPrefix.isEmpty()) {
+                    ""
+                } else {
+                    "${task.extendPrefix}_"
+                }
+            }${newUUid()}.${task.targetFile.name.extension}" // 对象在存储桶中的位置标识符，即称对象键
 
         val srcPath: String = task.targetFile.path
 

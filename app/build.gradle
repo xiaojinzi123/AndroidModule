@@ -68,6 +68,7 @@ dependencies {
     api project(':module-bugly1')
     api project(':module-ffmpeg')
     api project(':module-wx-sdk')
+    api project(':module-ali-oss')
     api project(':module-ali-pay')
     api project(':module-image-crop')
     api project(':module-storage')
