@@ -11,6 +11,7 @@ import com.alibaba.sdk.android.oss.internal.OSSAsyncTask
 import com.alibaba.sdk.android.oss.model.PutObjectRequest
 import com.alibaba.sdk.android.oss.model.PutObjectResult
 import com.xiaojinzi.component.anno.ServiceAnno
+import com.xiaojinzi.module.common.ali.oss.OSSFederationCredentialProviderImpl
 import com.xiaojinzi.module.common.base.spi.AliOssSpi
 import com.xiaojinzi.module.common.base.spi.FileUploadServiceBaseImpl
 import com.xiaojinzi.module.common.base.spi.FileUploadTaskDto
@@ -62,17 +63,7 @@ class AliOssFileUploadServiceImpl : FileUploadServiceBaseImpl(), AliOssSpi {
             }
         }
 
-        val credentialProvider: OSSCredentialProvider = object : OSSFederationCredentialProvider() {
-            override fun getFederationToken(): OSSFederationToken {
-                // 从您的服务器中获取Token。
-                return OSSFederationToken(
-                    "STS.NTGjwL7wHcGsy82MMq2Mb6wfL",
-                    "CtAnW5airamRuSZErz4aa96ByXZTcE7Jf4YupSARF4Sk",
-                    "CAISvgJ1q6Ft5B2yfSjIr5fyIc342qhp1IWYex6DqU0kPsJO2bLNrjz2IHhMeXdsAOkbsvwylWBZ6P8TlqBiStpGSAnNddMoPX+/WID4MeT7oMWQweEuqv/MQBq+aXPS2MvVfJ+KLrf0ceusbFbpjzJ6xaCAGxypQ12iN+/i6/clFKN1ODO1dj1bHtxbCxJ/ocsBTxvrOO2qLwThjxi7biMqmHIl2TovtP3mn5bNskWA1QWr8IJP+dSteKrDRtJ3IZJyX+2y2OFLbafb2EZSkUMSrPoo0PUdpGuf44DNUgcIsg/nIuuR8dAqJRdhdk2qynT/eQ2Xf5RazQ+z/+yfo34lVWrlhiB+0j9O6n9lCTHY18e4SMdq9k63pvSlHLebnf1KL/z1Gi1kFXQPhLEOJ35IaHXuToXDnvSiUkZM3vbtuMkagAEwIZysmx9gozZHC6l9JzyCN3vvRAXoQh0g5jSjRoFM3bdlv25v/f4Hh0YIEbQK946M3ruNKTTiuJnW+SdfnroLQgT19gzkX1yBDGyLGYzajBUisF3oizw4QmvTcljW14Pk8Fvzs6UuGYDs7bU8y8iidYCJjdv2nIhlSKBlQ8xJ/yAA",
-                    "2024-04-07T10:34:49Z"
-                )
-            }
-        }
+        val credentialProvider: OSSCredentialProvider = OSSFederationCredentialProviderImpl()
         val ossClient = OSSClient(app, endpoint, credentialProvider)
 
         ossClient.asyncPutObject(

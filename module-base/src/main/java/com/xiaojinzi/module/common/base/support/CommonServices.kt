@@ -1,7 +1,20 @@
 package com.xiaojinzi.module.common.base.support
 
 import com.xiaojinzi.component.impl.service.ServiceManager
-import com.xiaojinzi.module.common.base.spi.*
+import com.xiaojinzi.module.common.base.spi.AliOssCredentialGetService
+import com.xiaojinzi.module.common.base.spi.AliOssSpi
+import com.xiaojinzi.module.common.base.spi.AlipaySpi
+import com.xiaojinzi.module.common.base.spi.Bugly1Spi
+import com.xiaojinzi.module.common.base.spi.BuglySpi
+import com.xiaojinzi.module.common.base.spi.CommonAppInfoAdapterSpi
+import com.xiaojinzi.module.common.base.spi.FFmpegSpi
+import com.xiaojinzi.module.common.base.spi.NetworkSpi
+import com.xiaojinzi.module.common.base.spi.SPSpi
+import com.xiaojinzi.module.common.base.spi.TxCosCredentialGetService
+import com.xiaojinzi.module.common.base.spi.TxCosSpi
+import com.xiaojinzi.module.common.base.spi.WXLoginSpi
+import com.xiaojinzi.module.common.base.spi.WXPaySpi
+import com.xiaojinzi.module.common.base.spi.WXSdkSpi
 
 /**
  * 一些通用模块的服务
@@ -79,5 +92,17 @@ object CommonServices {
      */
     val txCosCredentialGetService: TxCosCredentialGetService?
         get() = ServiceManager.get(TxCosCredentialGetService::class)
+
+    /**
+     * 阿里 oss 对象存储 的服务
+     */
+    val aliOssSpi: AliOssSpi?
+        get() = ServiceManager.get(AliOssSpi::class)
+
+    /**
+     * 阿里 oss 对象存储的 凭证信息获取 的服务
+     */
+    val aliOssCredentialGetService: AliOssCredentialGetService?
+        get() = ServiceManager.get(AliOssCredentialGetService::class)
 
 }
