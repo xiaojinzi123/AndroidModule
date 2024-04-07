@@ -15,6 +15,7 @@ import com.xiaojinzi.module.common.ali.oss.OSSFederationCredentialProviderImpl
 import com.xiaojinzi.module.common.base.spi.AliOssSpi
 import com.xiaojinzi.module.common.base.spi.FileUploadServiceBaseImpl
 import com.xiaojinzi.module.common.base.spi.FileUploadTaskDto
+import com.xiaojinzi.support.ktx.LogSupport
 import com.xiaojinzi.support.ktx.app
 import com.xiaojinzi.support.ktx.extension
 import com.xiaojinzi.support.ktx.newUUid
@@ -70,6 +71,14 @@ class AliOssFileUploadServiceImpl : FileUploadServiceBaseImpl(), AliOssSpi {
             request, object : OSSCompletedCallback<PutObjectRequest, PutObjectResult> {
                 override fun onSuccess(request: PutObjectRequest, result: PutObjectResult) {
                     request.progressCallback = null
+                    LogSupport.d(
+                        tag = AliOssSpi.TAG,
+                        content = "上传成功: ${request.objectKey} ${result.serverCallbackReturnBody}"
+                    )
+                    postComplete(
+                        uid = task.uuid,
+                        url = "https://$bucket.$endpoint/${request.objectKey}",
+                    )
                 }
 
                 override fun onFailure(
@@ -78,6 +87,20 @@ class AliOssFileUploadServiceImpl : FileUploadServiceBaseImpl(), AliOssSpi {
                     serviceException: ServiceException?
                 ) {
                     request.progressCallback = null
+                    LogSupport.d(
+                        tag = AliOssSpi.TAG,
+                        content = "上传失败: ${request.objectKey} ${clientException?.message ?: serviceException?.message}"
+                    )
+                    postFail(
+                        uid = task.uuid,
+                        error = (clientException ?: serviceException
+                        ?: Exception("unknown error")).apply {
+                            LogSupport.d(
+                                tag = AliOssSpi.TAG,
+                                content = "上传失败: ${this.message}"
+                            )
+                        },
+                    )
                 }
             }
         ).apply {

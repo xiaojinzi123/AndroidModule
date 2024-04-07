@@ -7,16 +7,9 @@ import com.xiaojinzi.component.impl.service.serviceRequired
 import com.xiaojinzi.module.common.base.spi.SPSpi
 import com.xiaojinzi.module.common.base.support.CommonServices
 import com.xiaojinzi.support.init.AppInstance
-import com.xiaojinzi.support.ktx.AppScope
-import com.xiaojinzi.support.ktx.ErrorIgnoreContext
 import com.xiaojinzi.support.ktx.LogSupport
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
 import java.util.concurrent.atomic.AtomicInteger
 
 class DemoApp : Application() {
@@ -54,33 +47,6 @@ class DemoApp : Application() {
                 appId = "d602a40137",
                 appKey = "4a76894a-b292-44e3-b5c8-86c81249548f",
             )
-
-        flow1
-            .onEach {
-                delay(2000)
-                LogSupport.d(
-                    tag = "test",
-                    content = "flow1.value = $it",
-                )
-            }
-            .launchIn(scope = AppScope)
-
-        AppScope.launch(context = ErrorIgnoreContext) {
-
-            while (isActive) {
-
-                delay(1000)
-                flow1.tryEmit(value = counter.incrementAndGet()).apply {
-                    LogSupport.d(
-                        tag = "test",
-                        content = "flow1.tryEmit = $this",
-                    )
-                }
-
-            }
-
-        }
-
 
     }
 
