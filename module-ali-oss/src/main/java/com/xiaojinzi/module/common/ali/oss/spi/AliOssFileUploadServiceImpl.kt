@@ -94,12 +94,7 @@ class AliOssFileUploadServiceImpl : FileUploadServiceBaseImpl(), AliOssSpi {
                     postFail(
                         uid = task.uuid,
                         error = (clientException ?: serviceException
-                        ?: Exception("unknown error")).apply {
-                            LogSupport.d(
-                                tag = AliOssSpi.TAG,
-                                content = "上传失败: ${this.message}"
-                            )
-                        },
+                        ?: Exception("unknown error")),
                     )
                 }
             }
