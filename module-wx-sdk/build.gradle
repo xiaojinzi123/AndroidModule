@@ -1,9 +1,10 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-parcelize'
-    id 'kotlin-kapt'
-    id 'com.google.devtools.ksp'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.ksp)
     id 'maven-publish'
 }
 
@@ -19,6 +20,7 @@ ksp {
 
 dependencies {
     // 这里必须 api, 因为使用的地方要继承的时候, 会检测能不能依赖到某个类
+    //noinspection UseTomlInstead
     api 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.11'
 }
 

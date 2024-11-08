@@ -1,0 +1,127 @@
+[versions]
+gradle = "8.7.2"
+compileSdk = "35"
+minSdk = "21"
+targetSdk = "35"
+component = "8c968cf766"
+compose = "1.7.5"
+compose-kotlin-compiler-extension = "1.5.15"
+compose-material = "1.7.5"
+compose-material3 = "1.3.1"
+accompanist = "0.36.0"
+# kotlin = "1.9.25"
+kotlin = "2.0.21"
+# kotlin-ksp = "1.9.25-1.0.20"
+kotlin-ksp = "2.0.21-1.0.26"
+kotlin-coroutines = "1.9.0"
+android-support = "v1.0-beta218"
+emoji2 = "1.5.0"
+coil = "2.7.0"
+page3 = "3.3.2"
+
+[libraries]
+
+# common
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+# third party
+material = { group = "com.google.android.material", name = "material", version = "1.12.0" }
+gson = { group = "com.google.code.gson", name = "gson", version = "2.11.0" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version = "2.11.0" }
+retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version = "2.11.0" }
+baseAdapter = { group = "com.github.CymChad", name = "BaseRecyclerViewAdapterHelper", version = "3.0.4" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version = "4.16.0" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version = "4.13.1" }
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version = "6.6.0" }
+coil-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
+coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "coil" }
+coil-video = { group = "io.coil-kt", name = "coil-video", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+kotlin-flow-extensions = { group = "com.github.akarnokd", name = "kotlin-flow-extensions", version = "0.0.14" }
+exoplayer_core = { group = "com.google.android.exoplayer", name = "exoplayer-core", version = "2.19.1" }
+exoplayer_ui = { group = "com.google.android.exoplayer", name = "exoplayer-ui", version = "2.19.1" }
+
+# androidx
+androidx-activity = { group = "androidx.activity", name = "activity", version = "1.9.3" }
+androidx-acrivity-ktx = { group = "androidx.activity", name = "activity-ktx", version = "1.9.3" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version = "1.8.5" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version = "1.3.2" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version = "2.8.7" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version = "2.8.7" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version = "1.1.0" }
+androidx-room = { group = "androidx.room", name = "room-runtime", version = "2.6.1" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version = "2.6.1" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version = "2.6.1" }
+androidx-room-rxjava = { group = "androidx.room", name = "room-rxjava2", version = "2.6.1" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.7.0" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.15.0" }
+androidx-emoji2 = { group = "androidx.emoji2", name = "emoji2", version.ref = "emoji2" }
+androidx-emoji2-views = { group = "androidx.emoji2", name = "emoji2-views", version.ref = "emoji2" }
+androidx-emoji2-views-helper = { group = "androidx.emoji2", name = "emoji2-views-helper", version.ref = "emoji2" }
+androidx-page3-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "page3" }
+androidx-page3-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "page3" }
+
+# kotlin
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlin-android-extensions-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-android-extensions-runtime", version.ref = "kotlin" }
+kotlinx-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "kotlin-coroutines" }
+kotlinx-coroutines-rx2 = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-rx2", version.ref = "kotlin-coroutines" }
+
+# RxJava
+rxjava2-rxandroid = { group = "io.reactivex.rxjava2", name = "rxandroid", version = "2.1.1" }
+rxjava2-rxjava = { group = "io.reactivex.rxjava2", name = "rxjava", version = "2.2.21" }
+rxjava2-rxkotlin = { group = "io.reactivex.rxjava2", name = "rxkotlin", version = "2.4.0" }
+
+# Compose dependencies
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2024.10.01" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
+androidx-compose-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "2.8.7" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.9.3" }
+androidx-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "compose-material" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material3" }
+androidx-compose-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version = "1.1.0" }
+androidx-compose-ui-foundation = { group = "androidx.ui", name = "ui-foundation", version = "0.1.0-dev14" }
+androidx-drawerlayout = { group = "androidx.drawerlayout", name = "drawerlayout", version = "1.2.0" }
+
+# Compose support libraries
+accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist" }
+accompanist-swiperefresh = { group = "com.google.accompanist", name = "accompanist-swiperefresh", version.ref = "accompanist" }
+accompanist-insets = { group = "com.google.accompanist", name = "accompanist-insets", version.ref = "accompanist" }
+accompanist-sysuicontrol = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
+accompanist-flowlayout = { group = "com.google.accompanist", name = "accompanist-flowlayout", version.ref = "accompanist" }
+accompanist-placeholder = { group = "com.google.accompanist", name = "accompanist-placeholder", version.ref = "accompanist" }
+accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
+accompanist-webview = { group = "com.google.accompanist", name = "accompanist-webview", version.ref = "accompanist" }
+
+# xiaojinzi support library
+support-bean = { group = "com.github.xiaojinzi123.AndroidSupport", name = "lib-bean", version.ref = "android-support" }
+support-init = { group = "com.github.xiaojinzi123.AndroidSupport", name = "lib-init", version.ref = "android-support" }
+support-annotation = { group = "com.github.xiaojinzi123.AndroidSupport", name = "lib-annotation", version.ref = "android-support" }
+support-download = { group = "com.github.xiaojinzi123.AndroidSupport", name = "lib-download", version.ref = "android-support" }
+support-ktx = { group = "com.github.xiaojinzi123.AndroidSupport", name = "lib-ktx", version.ref = "android-support" }
+support-logger = { group = "com.github.xiaojinzi123.AndroidSupport", name = "lib-logger", version.ref = "android-support" }
+support-architecture = { group = "com.github.xiaojinzi123.AndroidSupport", name = "lib-architecture", version.ref = "android-support" }
+support-compose = { group = "com.github.xiaojinzi123.AndroidSupport", name = "lib-compose", version.ref = "android-support" }
+
+# Component dependencies
+component-annotation = { group = "com.github.xiaojinzi123.KComponent", name = "kcomponent-annotation", version.ref = "component" }
+component-compiler = { group = "com.github.xiaojinzi123.KComponent", name = "kcomponent-compiler", version.ref = "component" }
+component-impl = { group = "com.github.xiaojinzi123.KComponent", name = "kcomponent", version.ref = "component" }
+component-impl-rx = { group = "com.github.xiaojinzi123.KComponent", name = "kcomponent-rx", version.ref = "component" }
+component-plugin = { group = "com.github.xiaojinzi123.KComponent", name = "kcomponent-plugin", version.ref = "component" }
+
+# other
+android-networking = { group = "com.amitshekhar.android", name = "android-networking", version = "1.0.2" }
+
+[plugins]
+# com.android.library
+android-application = {id = "com.android.application", version.ref = "gradle" }
+android-library = {id = "com.android.library", version.ref = "gradle" }
+kotlin-android = {id = "org.jetbrains.kotlin.android", version.ref = "kotlin"}
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-kapt = {id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"}
+kotlin-ksp = {id = "com.google.devtools.ksp", version.ref = "kotlin-ksp"}
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

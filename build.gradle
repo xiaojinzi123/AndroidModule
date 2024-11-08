@@ -4,17 +4,8 @@ buildscript {
 
     apply from: "./common_support.gradle"
 
-    ext {
-        compose_version = '1.5.1'
-    }
-
-    ext.kotlin_version = "1.9.0"
-    ext.kotlin_coroutines_version = "1.7.3"
-
     ext.component_router_doc_folder = "./Doc"
     ext.component_router_doc_enable = false
-
-    apply from: "./dependencies.gradle"
 
     repositories {
         google()
@@ -23,16 +14,20 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath libs.gradle
+        classpath libs.kotlin.gradle.plugin
         // 组件化的
-        classpath libs.component_plugin
+        classpath libs.component.plugin
     }
 
 }
 
 plugins {
-    id 'com.google.devtools.ksp' version "$kotlin_version-1.0.13" apply false
-    id 'com.android.library' version '8.2.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.9.0' apply false
+    alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.kotlin.ksp) apply false
 }

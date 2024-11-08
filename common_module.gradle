@@ -3,6 +3,6 @@ apply from: getRootProjectPath() + "/common_ksp_for_component.gradle"
 
 dependencies {
     api project(':module-base')
-    ksp libs.component_compiler
-    kapt libs.room_compiler
+    ksp libs.component.compiler
+    ksp libs.androidx.room.compiler
 }

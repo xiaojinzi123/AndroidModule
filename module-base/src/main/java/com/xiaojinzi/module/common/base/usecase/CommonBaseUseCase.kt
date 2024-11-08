@@ -344,9 +344,7 @@ inline fun <reified VM : ViewModel> CommonContentView(
     when (vm) {
         is CommonUseCase -> {
             val isShowLoading by vm.isLoadingObservable.collectAsState(initial = false)
-            loadingDialog(
-                isShow = isShowLoading
-            )
+            loadingDialog(isShowLoading)
         }
     }
     val viewState = when (vm) {
@@ -393,7 +391,7 @@ inline fun <reified VM : ViewModel> CommonContentView(
             when (viewState) {
                 ViewState.STATE_INIT, ViewState.STATE_LOADING -> {
                     initView(
-                        modifier = Modifier
+                        Modifier
                             .fillMaxSize()
                             .nothing(),
                     )
@@ -409,14 +407,14 @@ inline fun <reified VM : ViewModel> CommonContentView(
                         contentAlignment = Alignment.Center,
                     ) {
                         errorView(
-                            modifier = Modifier
+                            Modifier
                                 .fillMaxSize()
                                 .nothing(),
                         )
                     }
                 }
                 ViewState.STATE_SUCCESS -> {
-                    content(vm = vm)
+                    content(vm)
                 }
             }
         } else {
@@ -425,14 +423,14 @@ inline fun <reified VM : ViewModel> CommonContentView(
                 enter = fadeIn(),
                 exit = fadeOut(),
             ) {
-                content(vm = vm)
+                content(vm)
             }
         }
     }
     dialogContent?.let {
         alertDialog(
-            dialogContent = it,
-            onDismissClick = {
+            it,
+            {
                 (vm as? CommonBaseUseCase)?.confirmDialogResultEventObservableDto?.tryEmit(
                     value = ConfirmDialogResultType.CANCEL
                 )

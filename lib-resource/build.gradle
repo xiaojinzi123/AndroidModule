@@ -1,7 +1,7 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-parcelize'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
     id 'maven-publish'
 }
 
@@ -12,9 +12,9 @@ android {
 apply from: getRootProjectPath() + "/common_android_lib.gradle"
 
 dependencies {
-    api libs.support_bean
-    api libs.support_annotation
-    api libs.support_ktx
+    api libs.support.bean
+    api libs.support.annotation
+    api libs.support.ktx
 }
 
 apply from: "../common_publish.gradle"
