@@ -85,15 +85,7 @@ dependencies {
     api libs.exoplayer.core
     api libs.exoplayer.ui
 
-
-
-    api libs.accompanist.pager
-    api libs.accompanist.swiperefresh
-    api libs.accompanist.sysuicontrol
-    api libs.accompanist.flowlayout
-    api libs.accompanist.placeholder
     api libs.accompanist.permissions
-    api libs.accompanist.webview
 
 }
 
