@@ -32,9 +32,9 @@ gson = { group = "com.google.code.gson", name = "gson", version = "2.13.2" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version = "3.0.0" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version = "3.0.0" }
 baseAdapter = { group = "com.github.CymChad", name = "BaseRecyclerViewAdapterHelper", version = "3.0.4" }
-glide = { group = "com.github.bumptech.glide", name = "glide", version = "5.0.4" }
-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version = "5.0.4" }
-lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version = "6.6.7" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version = "5.0.5" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version = "5.0.5" }
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version = "6.6.9" }
 coil-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
 coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "coil" }
 coil-video = { group = "io.coil-kt", name = "coil-video", version.ref = "coil" }
@@ -48,8 +48,8 @@ androidx-activity = { group = "androidx.activity", name = "activity", version = 
 androidx-acrivity-ktx = { group = "androidx.activity", name = "activity-ktx", version = "1.11.0" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version = "1.8.9" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version = "1.4.0" }
-androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version = "2.9.3" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version = "2.9.3" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version = "2.9.4" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version = "2.9.4" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version = "1.1.0" }
 androidx-room = { group = "androidx.room", name = "room-runtime", version = "2.8.0" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version = "2.8.0" }
@@ -79,7 +79,7 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
-androidx-compose-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "2.9.3" }
+androidx-compose-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "2.9.4" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.11.0" }
 androidx-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "compose-material" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material3" }
