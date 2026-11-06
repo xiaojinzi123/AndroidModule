@@ -23,7 +23,6 @@ dependencies {
     api project(':lib-resource')
     ksp libs.component.compiler
     api libs.kotlin.stdlib
-    api libs.kotlin.android.extensions.runtime
     api libs.kotlinx.coroutines.core.jvm
     api libs.kotlinx.coroutines.rx2
 
@@ -37,7 +36,6 @@ dependencies {
     api libs.androidx.compose.material
     api libs.androidx.compose.material3
     api libs.androidx.compose.constraintlayout
-    api libs.androidx.compose.ui.foundation
     api libs.androidx.drawerlayout
     api libs.androidx.compose.constraintlayout
     api libs.androidx.lifecycle.runtime.ktx

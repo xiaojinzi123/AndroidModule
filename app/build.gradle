@@ -41,6 +41,7 @@ android {
             if (Boolean.parseBoolean(project.findProperty("support.isIncludeKspFolder"))) {
                 kotlin {
                     sourceSets {
+                        // TODO(AGP10): 迁移到 androidComponents.onVariants
                         android.applicationVariants.all { variant ->
                             def variantName = variant.getName()
                             debug.kotlin.srcDirs += "build/generated/ksp/" + variantName + "/kotlin"
@@ -53,10 +54,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
 }
