@@ -2,9 +2,7 @@ plugins {
     id 'com.android.application'
     alias(libs.plugins.compose.compiler)
     id "com.xiaojinzi.kcomponent.plugin"
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.ksp)
 }
 
@@ -36,22 +34,11 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false
+            minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            if (Boolean.parseBoolean(project.findProperty("support.isIncludeKspFolder"))) {
-                kotlin {
-                    sourceSets {
-                        // TODO(AGP10): 迁移到 androidComponents.onVariants
-                        android.applicationVariants.all { variant ->
-                            def variantName = variant.getName()
-                            debug.kotlin.srcDirs += "build/generated/ksp/" + variantName + "/kotlin"
-                        }
-                    }
-                }
-            }
         }
         release {
-            minifyEnabled false
+            minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
